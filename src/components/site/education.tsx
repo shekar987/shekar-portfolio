@@ -1,5 +1,7 @@
 import { education, certifications } from "@/data/portfolio";
 import { SectionHeading } from "@/components/site/section-heading";
+import { Reveal } from "@/components/site/reveal";
+import { GraduationCap, BadgeCheck } from "lucide-react";
 
 export function Education() {
   return (
@@ -8,48 +10,65 @@ export function Education() {
       aria-labelledby="education-heading"
       className="border-t border-border"
     >
-      <div className="mx-auto max-w-3xl px-5 py-16 sm:px-6 sm:py-20">
+      <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
         <SectionHeading
           id="education-heading"
           eyebrow="04"
           title="Education & Certifications"
         />
 
-        <div className="mt-8 space-y-7">
-          {education.map((e) => (
-            <article key={e.degree}>
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="text-base font-semibold tracking-tight">
-                  {e.degree}
-                </h3>
-                <span className="font-mono text-xs text-muted-foreground">
-                  {e.period}
-                </span>
-              </div>
-              <p className="mt-0.5 text-sm text-foreground/90">{e.institution}</p>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                {e.note}
-              </p>
-            </article>
+        <div className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-2">
+          {education.map((e, i) => (
+            <Reveal key={e.degree} delay={i * 0.06}>
+              <article className="card-glow h-full rounded-xl border border-border bg-card/40 p-6 backdrop-blur-sm transition-colors hover:border-primary/30">
+                <div className="flex items-start gap-3">
+                  <span
+                    aria-hidden
+                    className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary"
+                  >
+                    <GraduationCap className="h-4 w-4" />
+                  </span>
+                  <div>
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                      <h3 className="text-base font-semibold tracking-tight">
+                        {e.degree}
+                      </h3>
+                      <span className="font-mono text-xs text-muted-foreground">
+                        {e.period}
+                      </span>
+                    </div>
+                    <p className="mt-0.5 text-sm text-foreground/80">
+                      {e.institution}
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      {e.note}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </Reveal>
           ))}
         </div>
 
         {/* Certifications */}
-        <div className="mt-8 border-t border-border pt-6">
-          <h3 className="font-mono text-xs uppercase tracking-wide text-muted-foreground">
-            Certifications
-          </h3>
-          <ul className="mt-3 space-y-1.5 text-sm text-foreground/90">
-            {certifications.map((c) => (
-              <li key={c} className="flex gap-2">
-                <span aria-hidden className="text-primary">
-                  ✓
-                </span>
-                {c}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Reveal className="mt-8">
+          <div className="rounded-xl border border-border bg-card/30 p-6 backdrop-blur-sm">
+            <h3 className="font-mono text-xs uppercase tracking-wider text-primary/80">
+              Certifications
+            </h3>
+            <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {certifications.map((c) => (
+                <li key={c} className="flex items-start gap-2.5 text-sm">
+                  <BadgeCheck
+                    className="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                    aria-hidden
+                  />
+                  <span className="text-foreground/80">{c}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

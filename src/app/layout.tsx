@@ -69,10 +69,15 @@ export const metadata: Metadata = {
 
 export const viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#faf9f7" },
-    { media: "(prefers-color-scheme: dark)", color: "#1a1916" },
+    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0c" },
   ],
 };
+
+// Inline script — runs before paint so [data-reveal] elements start hidden
+// only when JS is available. Without JS, .has-js is never added and all
+// content stays visible (no-JS resilience).
+const hasJsScript = `try{document.documentElement.classList.add('has-js')}catch(e){}`;
 
 export default function RootLayout({
   children,
@@ -81,12 +86,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: hasJsScript }} />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} grain antialiased bg-background text-foreground`}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

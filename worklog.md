@@ -65,3 +65,32 @@ Stage Summary:
 - Production-ready portfolio with 100% real data, verified end-to-end (render, no-JS, a11y, keyboard, mobile, OG image, CV PDF, VLM design audit).
 - Architecture is data-driven + typed; extending to a Products section is additive only.
 - Open items for user: real domain (metadataBase placeholder), add Node/RN only if real client work exists, add a 3rd deployed project if available.
+
+---
+Task ID: 8
+Agent: main
+Task: Visual redesign — "Refined Modern Dark" after user said previous editorial-light build was "ugly and not modern."
+
+Work Log:
+- Diagnosed: previous build over-corrected into "2008 Markdown blog" (warm-neutral light, tiny accent, no depth/motion). User + VLM both flagged it.
+- New direction: dark-first, near-black layered surfaces, single emerald accent (glows on dark), confident large type, tasteful Framer Motion, gradient mesh + grain + glass.
+- globals.css: rewrote palette (dark zinc base, emerald-400 accent), added .mesh-bg (3 overlapping radials, harmonised emerald+teal hues, subtle 16s drift animation, reduced-motion safe), .dot-grid, .grain (SVG film-grain fixed overlay), .text-accent-gradient (single-color emerald, not rainbow), .card-glow (gradient top-highlight + hover gradient border ring), no-JS motion gate (.has-js [data-reveal]{opacity:0}).
+- layout.tsx: defaultTheme="dark", added inline has-js script in <head> (runs before paint → no-FOUC gate), grain class on body.
+- Added Reveal client component (no-JS safe: CSS gate hides only when has-js; Framer Motion whileInView reveals; reduced-motion forces visible).
+- Rewrote all sections: site-nav (glass on scroll, hover glow), hero (client, two-column: massive headline with emerald gradient text + status pill + CTAs on left; "at a glance" glass card with 4 real facts + right-to-work on right), work (case-study cards, gradient borders, hover lift, Problem/Approach/Outcome), experience (accent node + metric chips), skills (3 tiers with hover badges), education (icon cards + cert grid), contact (glow CTA + big "Let's talk").
+- CRITICAL BUG FOUND + FIXED: hero container motion.div had data-reveal="" but its variants only defined staggerChildren (no opacity) → Framer Motion never set opacity:1 → container stayed at CSS opacity:0 → entire hero invisible. VLM saw "empty hero." Fix: removed data-reveal from container (children animate via their own variants). Hero then rendered fully.
+- Emerald overuse fix (per VLM): at-a-glance card icons changed from emerald to neutral (border + muted), reserving emerald for focal points only (headline gradient, primary CTA, status dot, metric chips).
+- Typography fix: subtitle text-base/muted → text-lg/foreground-75; card label tracking widened.
+- Verification:
+  * Lint clean.
+  * No-JS resilience: all content renders with JS disabled (hero headline, at-a-glance card facts, both projects, experience, 3 skill tiers, education, certs, contact) — has-js gate works perfectly.
+  * whileInView reveals: scrolled through page, all 5 sections reach opacity=1 on scroll.
+  * Mobile 390px: 9/10 (VLM), hamburger opens, no horizontal scroll.
+  * Keyboard: Tab navigates, focus visible.
+  * VLM design audit: hero 8/10 (from 3), work/experience/skills/footer all 8/10. "Modern, polished, premium dark. Emerald restrained and focal. Visible depth via gradient mesh + glass card. Close to Linear/Vercel/Raycast."
+- Pushed back on VLM suggestion to fabricate "5+ years" for seniority — user is 2 YoE; lying is a disqualifier. Kept honest positioning.
+
+Stage Summary:
+- Redesign complete: dark, modern, depth, restrained emerald, tasteful motion, no-JS safe, a11y intact, all real data.
+- VLM 3/10 → 8/10 (hero), 9/10 (mobile). Two independent issues resolved: (1) over-correction to blog aesthetic, (2) invisible-hero bug from data-reveal on opacity-less container.
+- DESIGN-DECISIONS.md to be updated with the visual-direction revision.

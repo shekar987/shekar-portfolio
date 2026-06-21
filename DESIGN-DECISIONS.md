@@ -25,25 +25,36 @@ Paste this into a future session when extending the site.
 
 ---
 
-## 3. Visual direction — Editorial-Technical, light-first, single emerald accent
+## 3. Visual direction — REVISED: Refined Modern Dark
 
-**Decision:** Light mode primary (warm neutral, not pure white), near-black text, one accent (emerald-600) used only on links, the primary CTA, status dot, and focus rings. Dark mode supported via `next-themes` (emerald-400 in dark). No gradients, no glassmorphism, no bento grid.
+**v1 (scrapped):** Editorial-Technical, light-first, warm-neutral, no motion. Read as a 2008 Markdown blog ("ugly / not modern"). Over-corrected away from the AI cliché into something plain.
 
-**Rationale:**
-- **Light-first** — recruiters view in offices / daylight; light is the default professional register.
-- **Warm neutral over pure white** — reads as authored, not templated (pure white + indigo is the default AI-portfolio tell).
-- **Emerald, not indigo/violet** — the indigo→violet→fuchsia gradient is the single loudest "AI-generated" signal in 2024–25. Emerald reads "active/available/go" and isn't the gradient everyone else uses.
-- **Accent used sparingly** — every accent instance is functional (CTA, link, status, focus). Decoration that competes with your evidence gets cut.
+**v2 (current): Refined Modern Dark.** Dark-first (cool near-black, layered surfaces), single emerald accent that glows on dark (focal pop, not default), confident large type, tasteful Framer Motion, gradient mesh + film grain + glass for depth.
 
-**References studied:** leerob.com (text-forward density), brianlovin.com (clean cards + motion only on hover), rauno.me (no wasted pixels), delba.dev (dark without the gradient cliché).
+**Rationale for the revision:**
+- **Dark-first** — modern dev portfolios (Linear/Vercel/Raycast) are dark-first; reads as current.
+- **Visible layered depth** — gradient mesh (3 harmonised emerald/teal radials, 16s drift), dot-grid, film grain, glass nav, gradient-border cards. v1's subtle warmth read as empty; depth must be *visible*.
+- **Emerald as focal pop, restrained** — headline gradient, primary CTA, status dot, metric chips only. Initially over-used (card icons); pulled back so it reads intentional.
+- **Confident typography** — hero `clamp(2.5rem → 4.75rem)`, tight tracking `-0.035em`, emerald gradient on "full-stack & AI" only.
+- **Tasteful motion** — staggered hero entrance, no-JS-safe scroll reveals (`.has-js` gate), card hover lift + glow, animated underlines. `prefers-reduced-motion` respected.
+- **A "designed moment"** — two-column hero with a glass "At a glance" card (4 real facts + right-to-work) gives authored structure.
+
+**Critical bug fixed during build:** the hero container `motion.div` had `data-reveal=""` but its variants only defined `staggerChildren` (no `opacity`), so Framer Motion never wrote `opacity:1` → the container stayed at CSS `opacity:0` → the entire hero was invisible (VLM saw "empty hero"). Fix: removed `data-reveal` from opacity-less containers.
+
+**Refused:** a VLM critique suggested fabricating "5+ years" for seniority. User is 2 YoE; lying is a disqualifier. Honest positioning kept.
+
+**References studied:** leerob.com, brianlovin.com, rauno.me, delba.dev, Linear/Vercel/Raycast.
 
 ---
 
-## 4. Animation philosophy — restrained
+## 4. Animation philosophy — tasteful + no-JS safe
 
-**Decision:** No scroll-triggered fade-ups. Motion only on hover (link underline grow, arrow nudge). `prefers-reduced-motion` fully respected.
-
-**Rationale:** Scroll-fade-everything is the universal AI-portfolio tell and a performance cost. Credibility and performance beat spectacle. The one motion that earns its keep is the link underline grow — it confirms interactivity.
+- Staggered hero entrance (Framer Motion, `staggerChildren`).
+- Scroll reveals via a `Reveal` client component + `whileInView`.
+- **No-JS resilience:** an inline script in `<head>` adds `.has-js` before paint. CSS hides `[data-reveal]` only when `.has-js` is present, so Framer Motion can animate without a flash. Without JS, `.has-js` is never added and all content stays visible. Verified: with JS fully disabled, every section renders.
+- Card hover: lift + gradient-border glow. Link underline grow. Arrow nudge.
+- `prefers-reduced-motion`: all motion disabled; `[data-reveal]` forced visible.
+- **Rule:** never put `data-reveal` on a motion container whose variants don't define `opacity` (the invisible-hero bug).
 
 ---
 
