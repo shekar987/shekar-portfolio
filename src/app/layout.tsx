@@ -2,42 +2,76 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
+const siteUrl = "https://soma-keesari.vercel.app";
+
 export const metadata: Metadata = {
-  title: "Aria Vance — Product Engineer & Founder",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Soma Shekar Keesari — Backend Engineer · Full-Stack & AI",
+    template: "%s — Soma Shekar Keesari",
+  },
   description:
-    "Product-minded engineer turning zero-to-one ideas into resilient, scalable systems. I build many products — fast, and built to last.",
+    "Backend engineer with 2+ years building Spring Boot microservices, now shipping full-stack and AI products. MSc Computer Science (AWS-accredited) at the University of East London. Based in London, open to work.",
   keywords: [
-    "Product Engineer",
-    "Founder",
-    "Full-Stack",
-    "Systems Design",
-    "AI Infrastructure",
-    "Portfolio",
+    "Backend Engineer",
+    "Full-Stack Engineer",
+    "Java",
+    "Spring Boot",
+    "React",
+    "TypeScript",
+    "Next.js",
+    "PostgreSQL",
+    "AWS",
+    "AI",
+    "Anthropic Claude",
+    "London",
   ],
-  authors: [{ name: "Aria Vance" }],
+  authors: [{ name: "Soma Shekar Keesari" }],
+  creator: "Soma Shekar Keesari",
+  alternates: {
+    canonical: siteUrl,
+  },
   openGraph: {
-    title: "Aria Vance — Product Engineer & Founder",
+    title: "Soma Shekar Keesari — Backend Engineer · Full-Stack & AI",
     description:
-      "I ship ambitious products — many of them, fast, and at scale.",
+      "2+ years building Spring Boot microservices, now shipping full-stack and AI products. MSc CS (AWS-accredited), University of East London. London, UK.",
+    url: siteUrl,
+    siteName: "Soma Shekar Keesari",
+    locale: "en_GB",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aria Vance — Product Engineer & Founder",
+    title: "Soma Shekar Keesari — Backend Engineer · Full-Stack & AI",
     description:
-      "I ship ambitious products — many of them, fast, and at scale.",
+      "2+ years building Spring Boot microservices, now shipping full-stack and AI products. London, UK.",
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#faf9f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#1a1916" },
+  ],
 };
 
 export default function RootLayout({
@@ -46,12 +80,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
-        {children}
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster />
+        </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
