@@ -214,58 +214,37 @@ export const experiences: Experience[] = [
   },
 ];
 
-export type SkillTier = {
-  tier: string;
-  label: string;
+export type SkillCategory = {
+  title: string;
   description: string;
   skills: string[];
 };
 
-export const skillTiers: SkillTier[] = [
+export const skillCategories: SkillCategory[] = [
   {
-    tier: "Daily",
-    label: "Daily",
-    description: "The stack I reach for without thinking.",
-    skills: [
-      "Java",
-      "Spring Boot",
-      "PostgreSQL",
-      "MySQL",
-      "React",
-      "TypeScript",
-      "JavaScript",
-      "Next.js",
-      "Tailwind CSS",
-      "Git",
-    ],
+    title: "Backend & Databases",
+    description: "Server-side systems, APIs, and data layers.",
+    skills: ["Java", "Spring Boot", "Python", "PostgreSQL", "Supabase"],
   },
   {
-    tier: "Working",
-    label: "Working knowledge",
-    description: "Shipped real features with these in production.",
+    title: "Frontend & Tools",
+    description: "Interfaces and the typed toolchain behind them.",
+    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+  },
+  {
+    title: "Cloud & DevOps",
+    description: "Shipping, automating, and running in production.",
     skills: [
-      "Python",
-      "Node.js",
-      "Supabase",
-      "Firebase",
-      "Stripe",
+      "AWS Certified Cloud Practitioner",
       "Docker",
       "Jenkins",
       "GitHub Actions",
-      "AWS",
-      "Vercel",
-      "Anthropic Claude API",
-      "OAuth 2.0",
-      "JWT",
-      "JUnit",
-      "SQL",
     ],
   },
   {
-    tier: "Learning",
-    label: "Currently levelling",
-    description: "Active focus via my MSc and own products.",
-    skills: ["React Native"],
+    title: "Specialities",
+    description: "Where I go deeper than the average full-stack engineer.",
+    skills: ["LLM Orchestration", "Prompt Engineering", "OAuth 2.0"],
   },
 ];
 

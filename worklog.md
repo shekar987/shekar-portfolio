@@ -176,3 +176,30 @@ Work Log:
 
 Stage Summary:
 - Projects section refactored to premium 2-column layout. CV Tailor featured (full-width) with Next.js/TypeScript/Supabase/Claude badges + "8-step LLM pipeline" architecture sub-bullet. RideX + AI Finance as the 2-column pair, RideX with React/Firebase/Stripe/Mapbox badges + "90+ Jest Tests" metric badge. Sleek Live Demo (primary) + GitHub (outline) buttons with hover lift on all cards. All no-JS safe, mobile responsive, VLM 9/10 across the board.
+
+---
+Task ID: 12
+Agent: main
+Task: Reorganise Skills section into 4 bordered grid categories with rounded-full tinted badges.
+
+Work Log:
+- Added `skillCategories` (SkillCategory[]) to portfolio.ts with the exact 4 groups + skills the user specified:
+  1. Backend & Databases — Java, Spring Boot, Python, PostgreSQL, Supabase
+  2. Frontend & Tools — React, Next.js, TypeScript, Tailwind CSS
+  3. Cloud & DevOps — AWS Certified Cloud Practitioner, Docker, Jenkins, GitHub Actions
+  4. Specialities — LLM Orchestration, Prompt Engineering, OAuth 2.0
+- Removed the old `skillTiers` (Daily/Working/Learning) — replaced entirely by the category-based grouping.
+- Rewrote skills.tsx:
+  * 2x2 grid of bordered cards (sm:grid-cols-2), each with card-glow treatment + hover border tint.
+  * Each card: icon (Database/Layout/Cloud/Sparkles) in a bordered chip + title + mono description.
+  * Each skill rendered as a rounded-full pill badge with subtle emerald tint (bg-primary/[0.06], border-border), hover lift + tint deepens to primary.
+  * Per-category accent color on the icon (emerald/teal/cyan/violet) — harmonised, not rainbow.
+- Verification:
+  * Lint clean.
+  * DOM verified: all 4 category titles + all 20 skills present; old tier labels ("Currently levelling", "Working knowledge", "Daily") completely gone.
+  * SSR HTML contains all new content (HTML-encoded ampersands); old tiers absent; noscript no-JS override intact.
+  * VLM desktop 9/10: "2x2 grid of distinct bordered cards, sleek rounded-full pill badges, icon-title-description headers, flawless Linear/Vercel premium aesthetic."
+  * VLM mobile 9/10: "4 cards stack vertically, badges wrap cleanly, no horizontal overflow."
+
+Stage Summary:
+- Skills section restructured into 4 clean bordered grid categories with sleek rounded-full tinted badges. All no-JS safe, mobile responsive, VLM 9/10 across desktop + mobile.
