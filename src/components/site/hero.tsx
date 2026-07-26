@@ -30,9 +30,9 @@ const item: Variants = {
 
 const glance = [
   { icon: Briefcase, label: "2+ years", value: "Backend Developer · Brane Group" },
-  { icon: GraduationCap, label: "MSc Computer Science", value: "University of East London" },
+  { icon: GraduationCap, label: "MSc CS · AssetGuard+ Research", value: "University of East London" },
   { icon: BadgeCheck, label: "AWS Certified", value: "Cloud Practitioner" },
-  { icon: Users, label: "10,000+ users", value: "Shipped on RideX" },
+  { icon: Users, label: "3 products shipped", value: "CV Tailor · RideX · FinSight" },
 ];
 
 export function Hero() {

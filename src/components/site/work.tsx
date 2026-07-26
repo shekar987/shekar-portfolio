@@ -15,7 +15,11 @@ export function Work() {
 
         <div className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-2">
           {projects.map((p, i) => (
-            <Reveal key={p.name} delay={i * 0.08}>
+            <Reveal
+              key={p.name}
+              delay={i * 0.06}
+              className={p.featured ? "lg:col-span-2" : ""}
+            >
               <ProjectCard project={p} />
             </Reveal>
           ))}
@@ -31,14 +35,24 @@ function ProjectCard({ project }: { project: Project }) {
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h3 className="text-xl font-semibold tracking-tight">
-            {project.name}
-          </h3>
-          <span className="font-mono text-xs text-muted-foreground">
-            {project.year}
-          </span>
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <h3 className="text-xl font-semibold tracking-tight">
+              {project.name}
+            </h3>
+            {project.featured && (
+              <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-primary">
+                Featured
+              </span>
+            )}
+            <span className="font-mono text-xs text-muted-foreground">
+              {project.year}
+            </span>
+          </div>
+          {project.tagline && (
+            <p className="mt-1 text-xs text-muted-foreground">{project.tagline}</p>
+          )}
         </div>
-        <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-all group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground transition-all group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </div>
 
       {/* Stack */}

@@ -1,7 +1,7 @@
 import { education, certifications } from "@/data/portfolio";
 import { SectionHeading } from "@/components/site/section-heading";
 import { Reveal } from "@/components/site/reveal";
-import { GraduationCap, BadgeCheck } from "lucide-react";
+import { GraduationCap, BadgeCheck, Microscope } from "lucide-react";
 
 export function Education() {
   return (
@@ -19,8 +19,12 @@ export function Education() {
 
         <div className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-2">
           {education.map((e, i) => (
-            <Reveal key={e.degree} delay={i * 0.06}>
-              <article className="card-glow h-full rounded-xl border border-border bg-card/40 p-6 backdrop-blur-sm transition-colors hover:border-primary/30">
+            <Reveal
+              key={e.degree}
+              delay={i * 0.06}
+              className={e.highlights ? "lg:col-span-2" : ""}
+            >
+              <article className="card-glow h-full rounded-xl border border-border bg-card/40 p-6 backdrop-blur-sm transition-colors hover:border-primary/30 sm:p-7">
                 <div className="flex items-start gap-3">
                   <span
                     aria-hidden
@@ -28,7 +32,7 @@ export function Education() {
                   >
                     <GraduationCap className="h-4 w-4" />
                   </span>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                       <h3 className="text-base font-semibold tracking-tight">
                         {e.degree}
@@ -43,6 +47,22 @@ export function Education() {
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                       {e.note}
                     </p>
+
+                    {e.highlights && (
+                      <ul className="mt-4 space-y-3 border-t border-border pt-4">
+                        {e.highlights.map((h, j) => (
+                          <li key={j} className="flex items-start gap-2.5 text-sm">
+                            <Microscope
+                              className="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                              aria-hidden
+                            />
+                            <span className="leading-relaxed text-foreground/80">
+                              {h}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
               </article>

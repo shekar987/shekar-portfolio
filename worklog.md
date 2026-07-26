@@ -117,3 +117,37 @@ Work Log:
 Stage Summary:
 - Bento section complete and verified: 3 cards, large bold numbers, subtle harmonised accent variation, matches the Refined Modern Dark aesthetic.
 - No-JS resilience bug found and fixed globally (noscript override for FM's SSR opacity:0) — this also fixes the hero and all Reveal sections that had the same latent issue.
+
+---
+Task ID: 10
+Agent: main
+Task: Update portfolio to match the latest CV (Shekar Keesari Master-CV.pdf). Retain AI Financial Analysis System per user instruction.
+
+Work Log:
+- Extracted new CV via pdftotext. Diffed against old CV. Key changes:
+  * NEW flagship project: CV Tailor (2026) — Next.js 16, Supabase, Claude API, 8-step LLM pipeline, multi-tenant RLS, AES-256-GCM, provider-agnostic routing, OAuth, security audit.
+  * RideX description massively expanded — three-portal marketplace, 8 serverless APIs, JWT/rate-limiting/idempotent Stripe, ACID transactions, 90+ tests, 12-week AI-augmented delivery.
+  * NEW experience: CodSoft Full Stack Development Intern (Jan–Jun 2022) — layered Student Course Registration System, JDBC isolation, 9 projects.
+  * Brane Group: new "Highlight" line + reworded bullets (same metrics).
+  * MSc: Research Assistant on AssetGuard+ (AI cybersecurity startup) + Full Stack Development Team.
+  * Skills: added Next.js, Node.js, Tailwind CSS, Supabase, Vercel, OAuth 2.0, JWT, LLM Orchestration.
+  * Cert: "Java Developer Certificate" → "Full Stack Developer Internship Certificate — CodSoft".
+  * Right to work: now "No sponsorship required."
+  * AI Financial Analysis System NOT in new CV — RETAINED on site per user's explicit instruction.
+- Replaced public/cv.pdf with the new PDF (348KB, 2 pages, PDF 1.7).
+- Rewrote src/data/portfolio.ts: added CV Tailor (featured) as first project, updated RideX (rich), retained AI Finance as 3rd project, added tagline field to Project type, changed experience from single object to experiences[] array (Brane + CodSoft), updated Brane with highlight field, updated skills tiers (Next.js/Tailwind→Daily, Node/Supabase/Vercel/OAuth/JWT→Working), updated MSc education with highlights[] (AssetGuard+), updated certifications, updated hero subtitle (now mentions AI products/LLM pipelines/multi-tenant security), updated rightToWork (added "No sponsorship required").
+- Updated hero.tsx glance card: "MSc CS · AssetGuard+ Research", "3 products shipped · CV Tailor · RideX · FinSight".
+- Updated work.tsx: 3 projects, CV Tailor featured (lg:col-span-2 + "Featured" badge + tagline), RideX + AI Finance as standard cards.
+- Updated experience.tsx: supports experiences[] array, optional highlight box (primary-tinted), per-role accent node.
+- Updated education.tsx: supports highlights[] (MSc AssetGuard+ spans 2 cols with microscope-icon bullets), BSc standard.
+- Verification:
+  * Lint clean.
+  * DOM content verified: CV Tailor ✓, RideX ✓, AI Finance ✓ (retained), CodSoft ✓, AssetGuard+ ✓, multi-tenant ✓, new cert ✓, no-sponsorship ✓.
+  * SSR HTML contains all new content + noscript no-JS override intact.
+  * CV PDF: 200 application/pdf 348KB.
+  * VLM: CV Tailor featured card 9/10, Experience (2 roles + highlight + metric chips) 9/10, Education (AssetGuard+ research) 9/10, mobile work 9/10.
+  * Mobile nav: 5 links (Impact/Work/Experience/Skills/Education), hamburger opens.
+  * No-JS resilience: noscript override forces FM opacity:0 elements visible.
+
+Stage Summary:
+- Portfolio fully synced with latest CV. CV Tailor is the new flagship (featured full-width card). AI Financial Analysis System retained per user instruction. All 3 projects, 2 experience roles, AssetGuard+ research, updated skills/certs/right-to-work all live and verified.
