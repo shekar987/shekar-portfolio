@@ -17,7 +17,7 @@ export function ContactFooter() {
       />
       <div className="relative mx-auto max-w-5xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
-          <p className="font-mono text-xs text-primary/70 select-none">05</p>
+          <p className="font-mono text-xs text-primary/70 select-none">06</p>
           <h2
             id="contact-heading"
             className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl sm:leading-[1.05]"

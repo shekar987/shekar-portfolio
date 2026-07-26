@@ -30,6 +30,7 @@ export const links = {
 } as const;
 
 export const navLinks: Link[] = [
+  { label: "Impact", href: "#impact" },
   { label: "Work", href: "#work" },
   { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
@@ -41,6 +42,41 @@ export const hero = {
   subtitle:
     "Two years at Brane Group cutting API latency 25% on a high-volume Spring Boot service. Now shipping a ride-hailing platform to 10,000+ users alongside an AWS-accredited MSc at the University of East London.",
 } as const;
+
+export type BentoStat = {
+  value: string;
+  label: string;
+  context: string;
+  icon: "zap" | "database" | "rocket";
+  accent: "emerald" | "teal" | "cyan";
+};
+
+export const bentoStats: BentoStat[] = [
+  {
+    value: "25%",
+    label: "Faster API response times",
+    context:
+      "Refactoring, query optimisation & caching on a high-volume Spring Boot transaction service.",
+    icon: "zap",
+    accent: "emerald",
+  },
+  {
+    value: "30%",
+    label: "Reduced SQL query execution time",
+    context:
+      "PostgreSQL & MySQL indexing and database tuning for downstream consumers.",
+    icon: "database",
+    accent: "teal",
+  },
+  {
+    value: "40%",
+    label: "Cut in deployment lead time",
+    context:
+      "CI/CD workflows built in Jenkins & GitHub Actions — lifting engineering velocity.",
+    icon: "rocket",
+    accent: "cyan",
+  },
+];
 
 export type Project = {
   name: string;

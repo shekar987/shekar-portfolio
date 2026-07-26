@@ -79,6 +79,12 @@ export const viewport = {
 // content stays visible (no-JS resilience).
 const hasJsScript = `try{document.documentElement.classList.add('has-js')}catch(e){}`;
 
+// No-JS resilience: Framer Motion outputs inline `opacity:0` during SSR for
+// elements with initial="hidden". Without JS these never animate to 1, so the
+// page would be blank. This noscript rule forces them visible. With JS,
+// noscript doesn't render and FM controls the animation normally.
+const noJsStyle = `[style*="opacity:0"]{opacity:1!important;transform:none!important}`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -88,6 +94,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: hasJsScript }} />
+        <noscript>
+          <style dangerouslySetInnerHTML={{ __html: noJsStyle }} />
+        </noscript>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} grain antialiased bg-background text-foreground`}

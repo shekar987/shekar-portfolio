@@ -94,3 +94,26 @@ Stage Summary:
 - Redesign complete: dark, modern, depth, restrained emerald, tasteful motion, no-JS safe, a11y intact, all real data.
 - VLM 3/10 → 8/10 (hero), 9/10 (mobile). Two independent issues resolved: (1) over-correction to blog aesthetic, (2) invisible-hero bug from data-reveal on opacity-less container.
 - DESIGN-DECISIONS.md to be updated with the visual-direction revision.
+
+---
+Task ID: 9
+Agent: main
+Task: Add a modern 3-column Bento Grid section below the hero showcasing top backend achievements (25% / 30% / 40%).
+
+Work Log:
+- Added `bentoStats` typed array to src/data/portfolio.ts with 3 real Brane Group metrics: 25% (API response), 30% (SQL query), 40% (deployment lead time). Each has label + context (the "how") + icon + accent.
+- Added `.text-grad-teal` and `.text-grad-cyan` gradient utilities to globals.css (harmonised green family — emerald/teal/cyan — for subtle per-card accent variation without going rainbow).
+- Created src/components/site/bento-stats.tsx: 3-column grid (stacks on mobile), card-glow treatment, large bold numbers (text-6xl/7xl, tracking -0.04em), per-card accent (emerald/teal/cyan) on number gradient + icon chip + bottom bar, icon scale on hover, Reveal component for no-JS-safe scroll animation.
+- Inserted <BentoStats/> between <Hero/> and <Work/> in page.tsx.
+- Renumbered sections: Impact=01, Work=02, Experience=03, Skills=04, Education=05, Contact=06. Added "Impact" to navLinks.
+- CRITICAL no-JS RESILIENCE FIX: discovered Framer Motion outputs `style="opacity:0;transform:translateY(18px)"` inline during SSR for all motion elements with initial="hidden". Without JS, these never animate to 1 → entire page (hero + bento + all Reveal sections) would be invisible. Added a `<noscript>` style in layout.tsx head: `[style*="opacity:0"]{opacity:1!important;transform:none!important}`. This targets only inline styles (not CSS classes), so it overrides FM's SSR opacity without breaking intentional CSS opacity. With JS, noscript doesn't render and FM controls animation normally. Verified: noscript is in the SSR HTML.
+- Verification:
+  * Lint clean.
+  * SSR HTML contains all bento content (25%, 30%, 40%, "Backend impact", all labels) + noscript override.
+  * JS-enabled: 3 cards render, firstNum="25%", section visible, has-js applied.
+  * Desktop bento: VLM 9/10 — "masterclass in modern premium dark design, massive bold typography, sophisticated emerald-to-cyan gradient, polished and balanced."
+  * Mobile bento: VLM 9/10 — "excellent vertical stacking, large readable typography, zero horizontal scroll."
+
+Stage Summary:
+- Bento section complete and verified: 3 cards, large bold numbers, subtle harmonised accent variation, matches the Refined Modern Dark aesthetic.
+- No-JS resilience bug found and fixed globally (noscript override for FM's SSR opacity:0) — this also fixes the hero and all Reveal sections that had the same latent issue.

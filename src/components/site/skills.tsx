@@ -16,7 +16,7 @@ export function Skills() {
       className="border-t border-border"
     >
       <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
-        <SectionHeading id="skills-heading" eyebrow="03" title="Skills" />
+        <SectionHeading id="skills-heading" eyebrow="04" title="Skills" />
 
         <div className="mt-10 space-y-8">
           {skillTiers.map((tier, i) => (

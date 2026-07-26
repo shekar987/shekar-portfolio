@@ -223,6 +223,29 @@
   color: transparent;
 }
 
+/* Harmonised accent gradients for the bento — subtle hue variation,
+   all in the green family so the palette stays disciplined. */
+.text-grad-teal {
+  background-image: linear-gradient(
+    120deg,
+    oklch(0.82 0.12 190) 0%,
+    oklch(0.7 0.11 195) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-grad-cyan {
+  background-image: linear-gradient(
+    120deg,
+    oklch(0.82 0.12 205) 0%,
+    oklch(0.72 0.12 215) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 /* Dot grid background — visible-but-tasteful */
 .dot-grid {
   background-image: radial-gradient(circle at 1px 1px, var(--grid-line) 1px, transparent 0);

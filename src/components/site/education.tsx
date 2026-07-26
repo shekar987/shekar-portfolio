@@ -13,7 +13,7 @@ export function Education() {
       <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
         <SectionHeading
           id="education-heading"
-          eyebrow="04"
+          eyebrow="05"
           title="Education & Certifications"
         />
 

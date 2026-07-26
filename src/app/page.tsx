@@ -1,5 +1,6 @@
 import { SiteNav } from "@/components/site/site-nav";
 import { Hero } from "@/components/site/hero";
+import { BentoStats } from "@/components/site/bento-stats";
 import { Work } from "@/components/site/work";
 import { Experience } from "@/components/site/experience";
 import { Skills } from "@/components/site/skills";
@@ -12,6 +13,7 @@ export default function Home() {
       <SiteNav />
       <main className="min-h-screen">
         <Hero />
+        <BentoStats />
         <Work />
         <Experience />
         <Skills />

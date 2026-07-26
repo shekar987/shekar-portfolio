@@ -11,7 +11,7 @@ export function Work() {
       className="border-t border-border"
     >
       <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
-        <SectionHeading id="work-heading" eyebrow="01" title="Selected Work" />
+        <SectionHeading id="work-heading" eyebrow="02" title="Selected Work" />
 
         <div className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-2">
           {projects.map((p, i) => (
