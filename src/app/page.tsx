@@ -5,6 +5,7 @@ import { Work } from "@/components/site/work";
 import { Experience } from "@/components/site/experience";
 import { Skills } from "@/components/site/skills";
 import { Education } from "@/components/site/education";
+import { WorkAuthorisationBanner } from "@/components/site/work-authorisation-banner";
 import { ContactFooter } from "@/components/site/contact-footer";
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
         <Experience />
         <Skills />
         <Education />
+        <WorkAuthorisationBanner />
         <ContactFooter />
       </main>
     </>

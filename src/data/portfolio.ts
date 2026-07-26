@@ -93,6 +93,8 @@ export type Project = {
   architecture?: string;
   /** A standout metric to surface as a badge on the card. */
   metricBadge?: string;
+  /** Highlighted "Key Achievement" callout inside the card. */
+  keyAchievement?: string;
   live?: { label: string; href: string };
   code: { label: string; href: string };
 };
@@ -112,6 +114,8 @@ export const projects: Project[] = [
     role: "Solo build — architecture, full-stack, AI pipeline, security audit, and deployment.",
     featured: true,
     architecture: "8-step LLM pipeline — structured JSON contracts with per-step integrity checks",
+    keyAchievement:
+      "Pre-launch security audit — 8 findings remediated across BLOCKER / SERIOUS / MINOR severities before going live.",
     live: { label: "cv-tailor-phi-rosy.vercel.app", href: "https://cv-tailor-phi-rosy.vercel.app/" },
     code: { label: "GitHub", href: "https://github.com/shekar987" },
   },
@@ -128,6 +132,8 @@ export const projects: Project[] = [
       "Delivered the full 3-portal system in under 12 weeks, validated by 90+ Jest / React Testing Library automated tests. Shipped via automated GitHub → Vercel CI/CD, pairing full-stack ownership with AI-augmented engineering (Claude Code, prompt-engineered agentic workflows).",
     role: "Solo build — architecture, full-stack, payments, real-time dispatch, testing, and deployment.",
     metricBadge: "90+ Jest Tests",
+    keyAchievement:
+      "Delivered the full 3-portal system in under 12 weeks — solo, pairing full-stack ownership with AI-augmented engineering.",
     live: { label: "uber-demo-omega.vercel.app", href: "https://uber-demo-omega.vercel.app" },
     code: { label: "GitHub", href: "https://github.com/shekar987/RideX-app" },
   },

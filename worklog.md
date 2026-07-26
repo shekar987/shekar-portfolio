@@ -203,3 +203,24 @@ Work Log:
 
 Stage Summary:
 - Skills section restructured into 4 clean bordered grid categories with sleek rounded-full tinted badges. All no-JS safe, mobile responsive, VLM 9/10 across desktop + mobile.
+
+---
+Task ID: 13
+Agent: main
+Task: Insert 4 requested enhancements WITHOUT overwriting existing layout/styles/structure. 3 of 4 already existed from prior turns, so only the genuine deltas were made.
+
+Work Log:
+- Honest assessment: (1) Bento metrics grid already exists as "Backend impact" below hero — left as-is, no duplicate. (2) Project cards already had hover:-translate-y-1 + tech badges + Live Demo/GitHub buttons — kept. (3) Skills already in 4 bordered categories with rounded-full badges — left as-is. (4) UK banner did not exist — built new.
+- DELTA 1 — Key Achievement box: added `keyAchievement` field to Project type. CV Tailor = "Pre-launch security audit — 8 findings remediated across BLOCKER/SERIOUS/MINOR severities before going live." RideX = "Delivered the full 3-portal system in under 12 weeks — solo, pairing full-stack ownership with AI-augmented engineering." Rendered as an emerald-tinted callout with a Trophy icon + "Key Achievement" mono label, placed after the Problem/Approach/Outcome body. AI Finance card intentionally has no keyAchievement (no standout to claim without padding).
+- DELTA 2 — Button rename: "GitHub" → "Source Code" on all project cards (kept the Github icon + existing hover-lift styling intact).
+- DELTA 3 — UK Work Authorisation banner: new component work-authorisation-banner.tsx. Emerald border (border-primary/30) + ShieldCheck checkmark icon in a primary-tinted chip + exact text "UK Work Authorisation — Full-time placement rights & Graduate Route eligible. No immediate sponsorship required." Subtle/micro (px-4 py-3, max-w-5xl). Reuses existing theme tokens, no new styles. Inserted in page.tsx between Education and ContactFooter.
+- No existing layout/styles/colors touched. All new elements reuse existing Tailwind config, Geist fonts, primary=emerald, card-glow, Reveal (no-JS safe).
+- Verification:
+  * Lint clean.
+  * DOM: 2 Key Achievement boxes (CV Tailor + RideX), 3 Source Code buttons, 2 Live Demo buttons, UK banner present with exact text, CV Tailor KA "Pre-launch security audit", RideX KA "under 12 weeks".
+  * SSR HTML contains all new content + noscript no-JS override intact.
+  * VLM: CV Tailor card 10/10 (Key Achievement box + Live Demo/Source Code buttons confirmed); RideX 9/10 (Key Achievement + 90+ Jest Tests + buttons); UK banner 9/10 (emerald border + checkmark + exact text + subtle/micro); mobile work card 9/10; mobile banner 9/10.
+- Note for user: footer already contained a similar right-to-work paragraph (kept per "do not overwrite"). The new banner is the prominent scannable signal; the footer paragraph remains as the detailed version. Slight overlap flagged — can consolidate if user wants.
+
+Stage Summary:
+- All 4 requests addressed without overwriting existing structure. 3 pre-existing items verified intact; 3 genuine deltas shipped (Key Achievement boxes on CV Tailor + RideX, GitHub→Source Code button rename, UK Work Authorisation micro-banner above footer). All no-JS safe, mobile responsive, VLM 9-10/10.

@@ -4,6 +4,7 @@ import {
   Github,
   Layers,
   ShieldCheck,
+  Trophy,
 } from "lucide-react";
 import { projects, type Project } from "@/data/portfolio";
 import { SectionHeading } from "@/components/site/section-heading";
@@ -131,10 +132,25 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
       </dl>
 
+      {/* Key Achievement — highlighted callout */}
+      {project.keyAchievement && (
+        <div className="mt-5 flex items-start gap-2.5 rounded-lg border border-primary/25 bg-primary/[0.07] px-3.5 py-2.5">
+          <Trophy className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-wider text-primary/80">
+              Key Achievement
+            </p>
+            <p className="mt-0.5 text-sm font-medium leading-relaxed text-foreground">
+              {project.keyAchievement}
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Role */}
       <p className="mt-5 text-xs text-muted-foreground">{project.role}</p>
 
-      {/* Sleek buttons — Live Demo + GitHub, hover lift */}
+      {/* Sleek buttons — Live Demo + Source Code, hover lift */}
       <div className="mt-5 flex flex-wrap gap-2.5 border-t border-border pt-5">
         {project.live && (
           <a
@@ -154,7 +170,7 @@ function ProjectCard({ project }: { project: Project }) {
           className="group/btn inline-flex items-center gap-1.5 rounded-lg border border-border bg-background/50 px-4 py-2 text-sm font-medium text-foreground/90 backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <Github className="h-3.5 w-3.5" aria-hidden />
-          GitHub
+          Source Code
         </a>
       </div>
     </article>
