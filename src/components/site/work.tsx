@@ -1,9 +1,19 @@
-import { ArrowUpRight, Code2, ExternalLink } from "lucide-react";
+import {
+  ArrowUpRight,
+  ExternalLink,
+  Github,
+  Layers,
+  ShieldCheck,
+} from "lucide-react";
 import { projects, type Project } from "@/data/portfolio";
 import { SectionHeading } from "@/components/site/section-heading";
 import { Reveal } from "@/components/site/reveal";
 
 export function Work() {
+  // Featured project(s) get full width; the rest form a clean 2-column pair.
+  const featured = projects.filter((p) => p.featured);
+  const standard = projects.filter((p) => !p.featured);
+
   return (
     <section
       id="work"
@@ -13,17 +23,27 @@ export function Work() {
       <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
         <SectionHeading id="work-heading" eyebrow="02" title="Selected Work" />
 
-        <div className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-2">
-          {projects.map((p, i) => (
-            <Reveal
-              key={p.name}
-              delay={i * 0.06}
-              className={p.featured ? "lg:col-span-2" : ""}
-            >
-              <ProjectCard project={p} />
-            </Reveal>
-          ))}
-        </div>
+        {/* Featured — full width */}
+        {featured.length > 0 && (
+          <div className="mt-12 space-y-5">
+            {featured.map((p, i) => (
+              <Reveal key={p.name} delay={i * 0.06}>
+                <ProjectCard project={p} />
+              </Reveal>
+            ))}
+          </div>
+        )}
+
+        {/* Standard — premium 2-column pair */}
+        {standard.length > 0 && (
+          <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-2">
+            {standard.map((p, i) => (
+              <Reveal key={p.name} delay={i * 0.06}>
+                <ProjectCard project={p} />
+              </Reveal>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
@@ -34,7 +54,7 @@ function ProjectCard({ project }: { project: Project }) {
     <article className="card-glow group flex h-full flex-col rounded-xl border border-border bg-card/40 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-card/70 sm:p-7">
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
-        <div>
+        <div className="min-w-0">
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <h3 className="text-xl font-semibold tracking-tight">
               {project.name}
@@ -55,17 +75,37 @@ function ProjectCard({ project }: { project: Project }) {
         <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground transition-all group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </div>
 
-      {/* Stack */}
+      {/* Tech badges */}
       <ul className="mt-3 flex flex-wrap gap-1.5">
         {project.stack.map((s) => (
           <li
             key={s}
-            className="rounded-md border border-border bg-background/50 px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
+            className="rounded-md border border-border bg-background/50 px-2 py-0.5 font-mono text-[11px] text-muted-foreground transition-colors group-hover:border-primary/20"
           >
             {s}
           </li>
         ))}
       </ul>
+
+      {/* Architecture sub-bullet — sharp technical signal */}
+      {project.architecture && (
+        <div className="mt-4 flex items-start gap-2 rounded-lg border border-primary/20 bg-primary/[0.06] px-3 py-2">
+          <Layers className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
+          <p className="text-xs font-medium leading-relaxed text-foreground/90">
+            {project.architecture}
+          </p>
+        </div>
+      )}
+
+      {/* Metric badge — standout number */}
+      {project.metricBadge && (
+        <div className="mt-4">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 font-mono text-xs font-semibold text-primary">
+            <ShieldCheck className="h-3.5 w-3.5" aria-hidden />
+            {project.metricBadge}
+          </span>
+        </div>
+      )}
 
       {/* Body */}
       <dl className="mt-5 space-y-4 text-sm leading-relaxed">
@@ -91,35 +131,31 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
       </dl>
 
-      {/* Role + Links */}
-      <div className="mt-auto pt-5">
-        <p className="text-xs text-muted-foreground">{project.role}</p>
-        <ul className="mt-4 flex flex-col gap-2 border-t border-border pt-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-5">
-          {project.live && (
-            <li>
-              <a
-                href={project.live.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="link-underline inline-flex items-center gap-1.5 text-sm font-medium text-primary"
-              >
-                <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-                Live
-              </a>
-            </li>
-          )}
-          <li>
-            <a
-              href={project.code.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-underline inline-flex items-center gap-1.5 text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
-            >
-              <Code2 className="h-3.5 w-3.5" aria-hidden />
-              Source
-            </a>
-          </li>
-        </ul>
+      {/* Role */}
+      <p className="mt-5 text-xs text-muted-foreground">{project.role}</p>
+
+      {/* Sleek buttons — Live Demo + GitHub, hover lift */}
+      <div className="mt-5 flex flex-wrap gap-2.5 border-t border-border pt-5">
+        {project.live && (
+          <a
+            href={project.live.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group/btn inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-[0_0_0_0_var(--primary)] transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_24px_-8px_var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+            Live Demo
+          </a>
+        )}
+        <a
+          href={project.code.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group/btn inline-flex items-center gap-1.5 rounded-lg border border-border bg-background/50 px-4 py-2 text-sm font-medium text-foreground/90 backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          <Github className="h-3.5 w-3.5" aria-hidden />
+          GitHub
+        </a>
       </div>
     </article>
   );

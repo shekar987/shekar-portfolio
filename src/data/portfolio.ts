@@ -89,6 +89,10 @@ export type Project = {
   outcome: string;
   role: string;
   featured?: boolean;
+  /** Architectural sub-bullet — a single sharp technical signal. */
+  architecture?: string;
+  /** A standout metric to surface as a badge on the card. */
+  metricBadge?: string;
   live?: { label: string; href: string };
   code: { label: string; href: string };
 };
@@ -97,7 +101,7 @@ export const projects: Project[] = [
   {
     name: "CV Tailor",
     year: "2026",
-    stack: ["Next.js 16", "TypeScript", "Supabase", "Anthropic Claude API", "Vercel"],
+    stack: ["Next.js", "TypeScript", "Supabase", "Anthropic Claude API"],
     tagline: "Full-stack AI application — end-to-end LLM product",
     problem:
       "Build an end-to-end LLM product that combines full-stack engineering with applied AI — multi-step prompt orchestration, provider abstraction, and production-grade auth and security — designed, built, and shipped solo.",
@@ -107,13 +111,14 @@ export const projects: Project[] = [
       "Secured multi-tenant data with Supabase Auth (3 OAuth methods), row-level security, and AES-256-GCM encryption for user-supplied credentials. Ran a full pre-launch security audit and remediated 8 findings across BLOCKER/SERIOUS/MINOR severities. Live in production.",
     role: "Solo build — architecture, full-stack, AI pipeline, security audit, and deployment.",
     featured: true,
+    architecture: "8-step LLM pipeline — structured JSON contracts with per-step integrity checks",
     live: { label: "cv-tailor-phi-rosy.vercel.app", href: "https://cv-tailor-phi-rosy.vercel.app/" },
     code: { label: "GitHub", href: "https://github.com/shekar987" },
   },
   {
     name: "RideX",
     year: "2025",
-    stack: ["React 19", "Node.js", "Firebase", "Stripe", "Mapbox", "Vercel"],
+    stack: ["React", "Firebase", "Stripe", "Mapbox"],
     tagline: "Full-stack ride-hailing platform — three-portal marketplace",
     problem:
       "Architect and ship a production-grade, three-portal ride-hailing marketplace (customer, driver, admin) end-to-end — owning UI, secure REST APIs, cloud data modelling, payment infrastructure, and DevOps as a solo engineer.",
@@ -122,8 +127,9 @@ export const projects: Project[] = [
     outcome:
       "Delivered the full 3-portal system in under 12 weeks, validated by 90+ Jest / React Testing Library automated tests. Shipped via automated GitHub → Vercel CI/CD, pairing full-stack ownership with AI-augmented engineering (Claude Code, prompt-engineered agentic workflows).",
     role: "Solo build — architecture, full-stack, payments, real-time dispatch, testing, and deployment.",
+    metricBadge: "90+ Jest Tests",
     live: { label: "uber-demo-omega.vercel.app", href: "https://uber-demo-omega.vercel.app" },
-    code: { label: "github.com/shekar987/RideX-app", href: "https://github.com/shekar987/RideX-app" },
+    code: { label: "GitHub", href: "https://github.com/shekar987/RideX-app" },
   },
   {
     name: "AI Financial Analysis System",
@@ -138,7 +144,7 @@ export const projects: Project[] = [
       "Answers analytical questions over multi-year filings — growth, margin, performance — sourced directly from parsed data, not generated.",
     role: "Solo build — ETL, prompt engineering, and Claude integration.",
     code: {
-      label: "github.com/shekar987/finsight-financial-chatbot",
+      label: "GitHub",
       href: "https://github.com/shekar987/finsight-financial-chatbot",
     },
   },

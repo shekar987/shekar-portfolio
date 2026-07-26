@@ -151,3 +151,28 @@ Work Log:
 
 Stage Summary:
 - Portfolio fully synced with latest CV. CV Tailor is the new flagship (featured full-width card). AI Financial Analysis System retained per user instruction. All 3 projects, 2 experience roles, AssetGuard+ research, updated skills/certs/right-to-work all live and verified.
+
+---
+Task ID: 11
+Agent: main
+Task: Refactor Projects section into a premium 2-column card layout with specific badges, architecture sub-bullet, metric badge, and sleek Live Demo/GitHub buttons.
+
+Work Log:
+- Added `architecture` and `metricBadge` fields to Project type in portfolio.ts.
+- CV Tailor: trimmed stack to the 4 requested badges (Next.js, TypeScript, Supabase, Anthropic Claude API); added architecture field = "8-step LLM pipeline — structured JSON contracts with per-step integrity checks".
+- RideX: trimmed stack to the 4 requested badges (React, Firebase, Stripe, Mapbox); added metricBadge = "90+ Jest Tests". Standardized code label to "GitHub" for button consistency.
+- AI Finance: kept (retained per earlier instruction); forms the 2nd card in the pair.
+- Rewrote work.tsx:
+  * Layout: featured project(s) full-width on top, standard projects in a clean 2-column pair beneath (lg:grid-cols-2). Mobile stacks all vertically.
+  * Architecture sub-bullet: rendered in a primary-tinted accent box with a Layers icon — a distinct visual signal separate from the Problem/Approach/Outcome body.
+  * Metric badge: pill-style with ShieldCheck icon, primary border + tint.
+  * Tech badges: mono font, subtle border, hover border tints to primary.
+  * Buttons: "Live Demo" (solid primary, glow shadow on hover) + "GitHub" (outline, border tints to primary on hover). Both have hover lift (-translate-y-0.5) and focus-visible rings.
+- Verification:
+  * Lint clean.
+  * DOM verified: CV Tailor + RideX + AI Finance all present; "8-step LLM pipeline" sub-bullet present; "90+ Jest Tests" metric badge present; 2 Live Demo buttons; all 8 stack badges (Next.js/TypeScript/Supabase/Anthropic Claude API/React/Firebase/Stripe/Mapbox) present.
+  * SSR HTML contains all new content + noscript no-JS override intact.
+  * VLM: featured CV Tailor card 9/10 (Featured badge, 4 tech badges, 8-step pipeline accent box, Live Demo + GitHub buttons all confirmed); 2-column pair 9/10 (RideX + AI Finance side by side, RideX has 4 badges + 90+ Jest Tests badge, both cards have buttons); mobile 9/10 (cards stack vertically, full-width buttons, no horizontal scroll).
+
+Stage Summary:
+- Projects section refactored to premium 2-column layout. CV Tailor featured (full-width) with Next.js/TypeScript/Supabase/Claude badges + "8-step LLM pipeline" architecture sub-bullet. RideX + AI Finance as the 2-column pair, RideX with React/Firebase/Stripe/Mapbox badges + "90+ Jest Tests" metric badge. Sleek Live Demo (primary) + GitHub (outline) buttons with hover lift on all cards. All no-JS safe, mobile responsive, VLM 9/10 across the board.
