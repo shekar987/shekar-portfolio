@@ -9,6 +9,7 @@ import {
 import { projects, type Project } from "@/data/portfolio";
 import { SectionHeading } from "@/components/site/section-heading";
 import { Reveal } from "@/components/site/reveal";
+import { CardGlow } from "@/components/site/card-glow";
 
 export function Work() {
   // Featured project(s) get full width; the rest form a clean 2-column pair.
@@ -52,6 +53,7 @@ export function Work() {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
+    <CardGlow className="rounded-xl">
     <article className="card-glow group flex h-full flex-col rounded-xl border border-border bg-card/40 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-card/70 sm:p-7">
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
@@ -174,5 +176,6 @@ function ProjectCard({ project }: { project: Project }) {
         </a>
       </div>
     </article>
+    </CardGlow>
   );
 }

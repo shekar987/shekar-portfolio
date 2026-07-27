@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
+import { AmbientParticles } from "@/components/site/ambient-particles";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -107,6 +108,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          {/* Ambient particle field — fixed, z-[-10], pointer-events-none.
+              Pure decoration; no-JS safe (renders nothing without JS). */}
+          <AmbientParticles />
           {children}
           <Toaster />
         </ThemeProvider>

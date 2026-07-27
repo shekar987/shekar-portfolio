@@ -1,6 +1,7 @@
 import { Zap, Database, Rocket, type LucideIcon } from "lucide-react";
 import { bentoStats, type BentoStat } from "@/data/portfolio";
 import { Reveal } from "@/components/site/reveal";
+import { CardGlow } from "@/components/site/card-glow";
 
 const iconMap: Record<BentoStat["icon"], LucideIcon> = {
   zap: Zap,
@@ -66,6 +67,7 @@ export function BentoStats() {
             const styles = accentStyles[stat.accent];
             return (
               <Reveal key={stat.label} delay={i * 0.08}>
+                <CardGlow className="rounded-xl">
                 <article className="card-glow group relative flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card/40 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-card/70 sm:p-7">
                   {/* Icon chip */}
                   <span
@@ -97,6 +99,7 @@ export function BentoStats() {
                     className={`mt-6 h-px w-full origin-left scale-x-100 ${styles.bar} opacity-30 transition-opacity duration-300 group-hover:opacity-70`}
                   />
                 </article>
+                </CardGlow>
               </Reveal>
             );
           })}

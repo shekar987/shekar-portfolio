@@ -224,3 +224,36 @@ Work Log:
 
 Stage Summary:
 - All 4 requests addressed without overwriting existing structure. 3 pre-existing items verified intact; 3 genuine deltas shipped (Key Achievement boxes on CV Tailor + RideX, GitHub→Source Code button rename, UK Work Authorisation micro-banner above footer). All no-JS safe, mobile responsive, VLM 9-10/10.
+
+---
+Task ID: 14
+Agent: main
+Task: Add non-destructive 3D ambient particle background + mouse-tracking card glow. No existing layout/text/sections changed.
+
+Work Log:
+- Built src/components/site/ambient-particles.tsx — pure Canvas2D, no 3D libs.
+  * Fixed, top:0, left:0, width:100%, height:100%, z-index:-10, pointer-events:none, opacity:0.4 (exact spec).
+  * Slow-moving glowing micro-particles in blue/violet hues (225/240/260/275).
+  * Subtle magnetic pull toward cursor within 180px radius.
+  * Perf guards: DPR capped at 2; particle count scales by viewport (90 max desktop, 0.55× on mobile); rAF pauses when tab hidden (visibilitychange); wrap-around edges.
+  * prefers-reduced-motion: renders ONE static frame, no rAF loop.
+  * No-JS safe: canvas renders as inert empty element without JS; all content lives above.
+- Built src/components/site/card-glow.tsx — client wrapper, mouse-tracking radial glow.
+  * Reuses --primary (emerald) via color-mix(in oklch, var(--primary) 18%, transparent) — stays on-brand (NOT the blue from the spec, which would clash with emerald accent).
+  * On mousemove: sets --glow-x/--glow-y/--glow-opacity=1; on mouseleave: opacity=0. 300ms opacity transition.
+  * Non-destructive: wraps existing <article> via <CardGlow className="rounded-xl">{...}</CardGlow> — no text/layout changes.
+  * pointer-events:none on the glow span so it never blocks clicks.
+- Mounted <AmbientParticles/> in layout.tsx body inside ThemeProvider (1 line + import). Non-destructive.
+- Wrapped project cards (work.tsx) + bento metric cards (bento-stats.tsx) with <CardGlow>. No existing markup/text/classes changed on the articles themselves.
+- Tradeoff note to user: spec said blue glow (rgba(59,130,246,0.15)); used emerald instead to match theme. Particle hues are blue/violet per spec (cool complement to emerald).
+- Verification:
+  * Lint clean.
+  * Canvas CSS verified via computed styles: position:fixed, z-index:-10, pointer-events:none, opacity:0.4, full viewport.
+  * CardGlow verified: dispatched real MouseEvent on card → --glow-opacity=1, --glow-x/y track cursor coords.
+  * No console/runtime errors.
+  * No-JS resilience: all content in SSR HTML; canvas is inert empty element without JS; noscript override intact.
+  * Mobile 390px: canvas 390×844, DOMContentLoaded 263ms, load 322ms, NO horizontal scroll, particles subtle + readable.
+  * VLM: hero with particles 9/10 ("subtle blue/violet micro-particles, fully readable, premium/atmospheric"); card with glow 9/10 ("subtle green glow, high-contrast text fully legible, distinctly premium"); mobile 8/10.
+
+Stage Summary:
+- Two non-destructive ambient enhancements shipped: interactive blue/violet particle field (fixed behind everything, mouse-reactive, perf-capped, reduced-motion safe, no-JS safe) + mouse-tracking emerald card glow on project + bento cards. Zero existing layout/text/sections changed. Lint clean, VLM 8-9/10, mobile fast, no-JS resilient.
