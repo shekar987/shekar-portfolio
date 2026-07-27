@@ -38,8 +38,18 @@ export const navLinks: Link[] = [
   { label: "Education", href: "#education" },
 ];
 
+export type HeroHeadline = {
+  prefix: string;
+  accent: string;
+  suffix: string;
+};
+
 export const hero = {
-  headline: "Backend engineer building full-stack & AI products.",
+  headline: {
+    prefix: "Backend engineer building",
+    accent: "full-stack & AI",
+    suffix: "products.",
+  } satisfies HeroHeadline,
   subtitle:
     "Two years at Brane Group cutting API latency 25% on high-volume Spring Boot services. Now shipping end-to-end AI products — multi-step LLM pipelines, multi-tenant security, provider-agnostic routing — alongside an AWS-accredited MSc at the University of East London.",
 } as const;

@@ -86,9 +86,11 @@ export function Hero() {
               id="hero-heading"
               className="mt-7 text-balance text-[2.5rem] font-semibold leading-[1.02] tracking-[-0.035em] sm:text-6xl sm:leading-[0.95] lg:text-[4.75rem]"
             >
-              Backend engineer building{" "}
-              <span className="text-accent-gradient">full-stack &amp; AI</span>{" "}
-              products.
+              {hero.headline.prefix}{" "}
+              <span className="text-accent-gradient">
+                {hero.headline.accent}
+              </span>{" "}
+              {hero.headline.suffix}
             </motion.h1>
 
             {/* Subtitle */}
