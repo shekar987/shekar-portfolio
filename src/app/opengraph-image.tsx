@@ -55,8 +55,8 @@ export default function OpengraphImage() {
               letterSpacing: "-0.02em",
             }}
           >
-            <div>Backend engineer building</div>
-            <div>full-stack &amp; AI products.</div>
+            <div>Full-stack AI engineer building</div>
+            <div>agentic &amp; generative products.</div>
           </div>
           <div style={{ display: "flex", fontSize: "28px", color: "#a8a59f", maxWidth: "900px" }}>
             2+ years on Spring Boot microservices. 10,000+ users shipped. MSc CS

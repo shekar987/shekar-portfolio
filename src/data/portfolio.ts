@@ -46,8 +46,8 @@ export type HeroHeadline = {
 
 export const hero = {
   headline: {
-    prefix: "Backend engineer building",
-    accent: "full-stack & AI",
+    prefix: "Full-stack AI engineer building",
+    accent: "agentic & generative",
     suffix: "products.",
   } satisfies HeroHeadline,
   subtitle:
