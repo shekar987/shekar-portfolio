@@ -2,7 +2,7 @@
  * Single source of truth for all portfolio content.
  * Typed so the compiler guards against drift.
  *
- * Updated Sep 2026 from "Shekar Keesari Resume.pdf" (public/cv.pdf).
+ * Updated Sep 2026 from "SHEKAR KEESARI RESUME.pdf" (public/cv.pdf).
  * Every figure here appears in that CV — nothing is inflated or invented.
  * The AI Financial Analysis System (FinSight) is retained on the site per an
  * earlier explicit request even though it is not on the current CV.
@@ -68,7 +68,7 @@ export type GlanceIcon = "briefcase" | "badge" | "graduation" | "rocket";
 
 /** Facts shown in the hero profile card. Real, CV-backed numbers only. */
 export const glance: { label: string; value: string; icon: GlanceIcon }[] = [
-  { label: "2+ years", value: "Backend Developer · Brane Group", icon: "briefcase" },
+  { label: "2+ years", value: "Full Stack Engineer · Brane Group", icon: "briefcase" },
   { label: "AWS Certified ×2", value: "AI Practitioner · Cloud Practitioner", icon: "badge" },
   { label: "MSc Computer Science", value: "University of East London · AssetGuard+", icon: "graduation" },
   { label: "3 products shipped", value: "Jobhuntz · RideX · FinSight", icon: "rocket" },
@@ -265,7 +265,7 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
-    role: "Backend Developer",
+    role: "Full Stack Engineer",
     company: "Brane Group",
     period: "Jul 2022 – Sep 2024",
     type: "Full-time · 2 years",
