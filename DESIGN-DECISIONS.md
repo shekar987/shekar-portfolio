@@ -144,7 +144,7 @@ The data-driven architecture means the compiler guards content drift, and a new 
 - **Node.js / React Native client work** — if you have real projects in either stack, add them (one line each, with a number). Currently omitted because they're not in your materials.
 - **A third project** — two solid projects is fine for 2 YoE, but a third (especially a deployed product with users) would strengthen the "builds many products" positioning you mentioned. Only add if real.
 - **Live demo for the AI Finance system** — currently code-only. If you deploy it, add a `live` link like RideX has.
-- **Domain** — `metadataBase` is set to a placeholder Vercel URL (`soma-keesari.vercel.app`). Update to your real domain when you buy one; OG/Twitter cards depend on it for absolute URLs.
+- **Domain** — `metadataBase` is `https://shekar-portfolio-eight.vercel.app`, the same Portfolio link embedded in the CV. Update it only if a custom domain is bought; OG/Twitter cards depend on it for absolute URLs.
 - **Plausible vs Vercel Analytics** — currently Vercel Analytics. If you want analytics independent of Vercel (e.g. self-hosted), swap for Plausible with a one-line script tag in `layout.tsx`.
 
 ---
