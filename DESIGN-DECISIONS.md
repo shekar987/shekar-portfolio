@@ -160,3 +160,30 @@ The data-driven architecture means the compiler guards content drift, and a new 
 - **CV PDF** — `/cv.pdf` returns 200, application/pdf, 70KB.
 - **OG image** — `/opengraph-image` returns 200, image/png, 53KB; VLM-verified name/role/proof render correctly.
 - **Design quality** — VLM (glm-4.6v) confirmed across desktop hero, full page, and mobile: authored (not templated), clear hierarchy, accent used sparingly, no visual problems, hiring-manager-credible.
+
+---
+
+## 9. v3 refresh (Sep 2026) — CV realignment + "living dark" polish
+
+**Trigger:** updated CV (`public/cv.pdf`, "Shekar Keesari Resume.pdf"). The CV repositions the Brane Group role from Java/Spring Boot to **Python/FastAPI + React/TypeScript**, adds the **AWS Certified AI Practitioner**, renames CV Tailor to **Jobhuntz** (live at jobhuntz.app, repo shekar987/cv-tailor), and states "Immediately available · No sponsorship required".
+
+**Content decisions (all in `src/data/portfolio.ts`, the single source of truth):**
+- Every metric on the site now maps 1:1 to a CV line: 20+ API modules, ~25% API latency, ~30% query time, 25% less manual documentation, 20% less repeat frontend effort. The old Spring Boot / Jenkins / "40% deployment lead time" / "mentored 3 juniors" bullets were removed because they are no longer on the CV.
+- FinSight (AI Financial Analysis System) is kept per the earlier explicit request, even though it is not on the CV.
+- Skills regrouped into six CV-derived areas: Backend & APIs, Frontend, Data & Storage, AI & LLM Engineering, Cloud & DevOps, Security & Auth.
+- Certifications now list only the two AWS credentials on the CV.
+- Site URL / canonical updated to `https://shekar-portfolio-eight.vercel.app` (the Portfolio link embedded in the CV).
+
+**Visual decisions:**
+- Hero: aurora blobs (three blurred, drifting radials) replace the static mesh; shimmering gradient on "agentic & generative"; a **profile-as-code window** (`shekar.ts`) plus four glance tiles replace the plain "At a glance" card. A CSS-only tech ticker sits under the hero.
+- Impact: 5-tile asymmetric bento (6-col grid, 3/3/2/2/2) with count-up numbers and per-tile tints (emerald, teal, cyan, violet, amber) — same chroma so the palette stays one family.
+- Work: featured Jobhuntz card is two-column with a **pipeline visual** (JD → analysis → CV + cover letter → ATS scoring, with JSON-contract / integrity-check labels). Problem/Approach/Outcome prose replaced by summary + check-list highlights + stat chips.
+- Experience: vertical timeline rail with glowing nodes; metric chips aligned in a fixed-width column; stack chips per role.
+- Nav: centred glass pill with scroll-spy active indicator (Framer `layoutId`), 2px scroll-progress bar, CV button.
+- Footer: two-column contact with a "Reach me" card (email, phone, LinkedIn, GitHub) and right-to-work line.
+- Ambient particles retinted from blue/violet to emerald/teal so the background matches the accent.
+- OG image rebuilt on the dark emerald palette with current copy (the old one still said "10,000+ users").
+
+**Bug fixed during build:** on mobile the hero code window's long `whitespace-pre` lines made the grid column wider than the viewport, clipping the headline. Fix: `min-w-0` on both grid columns + `overflow-hidden` on the card. Verified via CDP that `scrollWidth === innerWidth` at 390px.
+
+**Rule kept:** no fabricated numbers. Anything not on the CV was removed rather than reworded.

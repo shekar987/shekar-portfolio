@@ -1,9 +1,11 @@
 /**
  * Single source of truth for all portfolio content.
  * Typed so the compiler guards against drift.
- * Updated from the latest CV (Shekar Keesari Master-CV.pdf).
- * AI Financial Analysis System is retained on the site per explicit request,
- * even though it is not in the latest CV.
+ *
+ * Updated Sep 2026 from "Shekar Keesari Resume.pdf" (public/cv.pdf).
+ * Every figure here appears in that CV — nothing is inflated or invented.
+ * The AI Financial Analysis System (FinSight) is retained on the site per an
+ * earlier explicit request even though it is not on the current CV.
  */
 
 export type Link = {
@@ -14,20 +16,26 @@ export type Link = {
 
 export const profile = {
   name: "Soma Shekar Keesari",
+  firstName: "Shekar",
   initials: "SK",
-  role: "Backend Engineer · Full-Stack & AI",
+  role: "Full-Stack Engineer · AI Engineer",
   location: "London, UK",
-  status: "Open to backend / full-stack roles",
+  status: "Immediately available",
+  yearsExperience: "2+",
   rightToWork:
-    "Right to work in the UK during MSc placement · Graduate Route visa eligible January 2027 · No sponsorship required",
+    "Eligible for full-time work in the UK · Immediately available · No sponsorship required",
   email: "somashekarkeesari18@gmail.com",
+  phone: "+44 7553 449836",
+  phoneHref: "tel:+447553449836",
 } as const;
 
 export const links = {
   email: `mailto:${profile.email}`,
+  phone: profile.phoneHref,
   linkedin: "https://www.linkedin.com/in/shekar-keesari-4bbaa6234/",
   github: "https://github.com/shekar987",
   cv: "/cv.pdf",
+  site: "https://shekar-portfolio-eight.vercel.app",
 } as const;
 
 export const navLinks: Link[] = [
@@ -36,6 +44,7 @@ export const navLinks: Link[] = [
   { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
   { label: "Education", href: "#education" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export type HeroHeadline = {
@@ -45,120 +54,193 @@ export type HeroHeadline = {
 };
 
 export const hero = {
+  eyebrow: "AWS Certified AI & Cloud Practitioner",
   headline: {
     prefix: "Full-stack AI engineer building",
     accent: "agentic & generative",
     suffix: "products.",
   } satisfies HeroHeadline,
   subtitle:
-    "Two years at Brane Group cutting API latency 25% on high-volume Spring Boot services. Now shipping end-to-end AI products — multi-step LLM pipelines, multi-tenant security, provider-agnostic routing — alongside an AWS-accredited MSc at the University of East London.",
+    "2+ years shipping production Python / FastAPI and React systems at Brane Group — 20+ API modules, JWT/RBAC-secured enterprise workflows and LLM/RAG knowledge retrieval. Now designing, building and shipping end-to-end AI products solo alongside an AWS-accredited MSc at the University of East London.",
 } as const;
 
+export type GlanceIcon = "briefcase" | "badge" | "graduation" | "rocket";
+
+/** Facts shown in the hero profile card. Real, CV-backed numbers only. */
+export const glance: { label: string; value: string; icon: GlanceIcon }[] = [
+  { label: "2+ years", value: "Backend Developer · Brane Group", icon: "briefcase" },
+  { label: "AWS Certified ×2", value: "AI Practitioner · Cloud Practitioner", icon: "badge" },
+  { label: "MSc Computer Science", value: "University of East London · AssetGuard+", icon: "graduation" },
+  { label: "3 products shipped", value: "Jobhuntz · RideX · FinSight", icon: "rocket" },
+];
+
+/** Technologies for the scrolling ticker under the hero. All from the CV. */
+export const techTicker: string[] = [
+  "Python",
+  "FastAPI",
+  "React",
+  "TypeScript",
+  "Next.js",
+  "PostgreSQL",
+  "Redis",
+  "MongoDB",
+  "Supabase",
+  "AWS",
+  "Docker",
+  "Anthropic Claude API",
+  "OpenAI API",
+  "LangChain",
+  "LlamaIndex",
+  "RAG",
+  "JWT / OAuth 2.0",
+  "Stripe",
+  "Firebase",
+];
+
 export type BentoStat = {
-  value: string;
+  /** Numeric part, animated with a count-up. */
+  number: number;
+  prefix?: string;
+  suffix?: string;
   label: string;
   context: string;
-  icon: "zap" | "database" | "rocket";
-  accent: "emerald" | "teal" | "cyan";
+  icon: "layers" | "zap" | "database" | "sparkles" | "layout";
+  accent: "emerald" | "teal" | "cyan" | "violet" | "amber";
+  /** Column span on large screens (6-column bento). */
+  span: 2 | 3;
 };
 
 export const bentoStats: BentoStat[] = [
   {
-    value: "25%",
+    number: 20,
+    suffix: "+",
+    label: "Production API modules",
+    context:
+      "Engineered and delivered with Python, FastAPI, React and TypeScript across the full software development lifecycle at Brane Group.",
+    icon: "layers",
+    accent: "emerald",
+    span: 3,
+  },
+  {
+    number: 25,
+    suffix: "%",
     label: "Faster API response times",
     context:
-      "Refactoring, query optimisation & caching on a high-volume Spring Boot transaction service under production load.",
+      "Service-layer optimisation and more efficient request processing on JWT/RBAC-secured FastAPI services.",
     icon: "zap",
-    accent: "emerald",
-  },
-  {
-    value: "30%",
-    label: "Reduced SQL query execution time",
-    context:
-      "PostgreSQL & MySQL indexing and database tuning for downstream consumers.",
-    icon: "database",
     accent: "teal",
+    span: 3,
   },
   {
-    value: "40%",
-    label: "Cut in deployment lead time",
+    number: 30,
+    prefix: "~",
+    suffix: "%",
+    label: "Faster frequent queries",
     context:
-      "CI/CD workflows built in Jenkins & GitHub Actions — lifting engineering velocity and rollback reliability.",
-    icon: "rocket",
+      "Indexing, query optimisation and caching across PostgreSQL, MySQL, MongoDB and Redis.",
+    icon: "database",
     accent: "cyan",
+    span: 2,
+  },
+  {
+    number: 25,
+    suffix: "%",
+    label: "Less manual documentation",
+    context:
+      "LLM/RAG knowledge solutions automating business-document generation across supported workflows.",
+    icon: "sparkles",
+    accent: "violet",
+    span: 2,
+  },
+  {
+    number: 20,
+    suffix: "%",
+    label: "Less repeat frontend effort",
+    context:
+      "Reusable React + TypeScript component patterns across 3+ core enterprise workflow areas.",
+    icon: "layout",
+    accent: "amber",
+    span: 2,
   },
 ];
 
 export type Project = {
   name: string;
   year: string;
-  stack: string[];
   tagline: string;
-  problem: string;
-  approach: string;
-  outcome: string;
+  stack: string[];
+  /** One-paragraph framing of the product and my ownership. */
+  summary: string;
+  /** Sharp, CV-backed technical bullets. */
+  highlights: string[];
   role: string;
   featured?: boolean;
-  /** Architectural sub-bullet — a single sharp technical signal. */
-  architecture?: string;
-  /** A standout metric to surface as a badge on the card. */
-  metricBadge?: string;
-  /** Highlighted "Key Achievement" callout inside the card. */
-  keyAchievement?: string;
+  /** Small stat chips rendered under the title. */
+  badges?: string[];
+  /** Optional linear pipeline to visualise (featured card only). */
+  pipeline?: string[];
   live?: { label: string; href: string };
   code: { label: string; href: string };
 };
 
 export const projects: Project[] = [
   {
-    name: "CV Tailor",
+    name: "Jobhuntz",
     year: "2026",
-    stack: ["Next.js", "TypeScript", "Supabase", "Anthropic Claude API"],
-    tagline: "Full-stack AI application — end-to-end LLM product",
-    problem:
-      "Build an end-to-end LLM product that combines full-stack engineering with applied AI — multi-step prompt orchestration, provider abstraction, and production-grade auth and security — designed, built, and shipped solo.",
-    approach:
-      "Architected an 8-step LLM pipeline (JD analysis → tailored CV + cover letter → ATS scoring) with structured JSON contracts between steps and per-step integrity checks that trace every output claim to source, preventing model fabrication. Engineered a provider-agnostic routing layer across 3 LLM providers with a tiered access system (free-tier quota → user-supplied keys), enforced server-side via Postgres SECURITY DEFINER functions and column-level grants.",
-    outcome:
-      "Secured multi-tenant data with Supabase Auth (3 OAuth methods), row-level security, and AES-256-GCM encryption for user-supplied credentials. Ran a full pre-launch security audit and remediated 8 findings across BLOCKER/SERIOUS/MINOR severities. Live in production.",
-    role: "Solo build — architecture, full-stack, AI pipeline, security audit, and deployment.",
+    tagline: "Full-stack AI application — an end-to-end LLM product",
+    stack: [
+      "Next.js 16",
+      "TypeScript",
+      "Supabase · Postgres · Auth · RLS",
+      "Anthropic Claude API",
+      "Vercel",
+    ],
+    summary:
+      "An end-to-end LLM product combining full-stack engineering with applied AI — multi-step prompt orchestration, provider abstraction and production-grade auth and security — designed, built and shipped solo.",
+    highlights: [
+      "Architected an 8-step LLM pipeline (JD analysis → tailored CV + cover letter → ATS scoring) with structured JSON contracts between steps and per-step integrity checks that trace every output claim to source, preventing model fabrication.",
+      "Engineered a provider-agnostic routing layer across 3 LLM providers with a tiered access system (free-tier quota → user-supplied keys), enforced server-side via Postgres SECURITY DEFINER functions and column-level grants.",
+      "Secured multi-tenant data with Supabase Auth (3 OAuth methods), row-level security and AES-256-GCM encryption for user-supplied credentials.",
+      "Ran a full pre-launch security audit and remediated 8 findings across BLOCKER / SERIOUS / MINOR severities before going live.",
+    ],
+    role: "Solo build — architecture, full-stack, AI pipeline, security audit and deployment.",
     featured: true,
-    architecture: "8-step LLM pipeline — structured JSON contracts with per-step integrity checks",
-    keyAchievement:
-      "Pre-launch security audit — 8 findings remediated across BLOCKER / SERIOUS / MINOR severities before going live.",
-    live: { label: "cv-tailor-phi-rosy.vercel.app", href: "https://cv-tailor-phi-rosy.vercel.app/" },
-    code: { label: "GitHub", href: "https://github.com/shekar987" },
+    badges: ["8-step LLM pipeline", "3 LLM providers", "8 security findings fixed"],
+    pipeline: ["Job description", "JD analysis", "Tailored CV + cover letter", "ATS scoring"],
+    live: { label: "jobhuntz.app", href: "https://www.jobhuntz.app/" },
+    code: { label: "GitHub", href: "https://github.com/shekar987/cv-tailor" },
   },
   {
     name: "RideX",
     year: "2025",
-    stack: ["React", "Firebase", "Stripe", "Mapbox"],
-    tagline: "Full-stack ride-hailing platform — three-portal marketplace",
-    problem:
-      "Architect and ship a production-grade, three-portal ride-hailing marketplace (customer, driver, admin) end-to-end — owning UI, secure REST APIs, cloud data modelling, payment infrastructure, and DevOps as a solo engineer.",
-    approach:
-      "Engineered 8 serverless REST APIs (Node.js / Cloud Functions) with JWT verification, rate limiting (100 req / 15 min), and idempotent Stripe processing — automating an 80/20 commission split with penny-accurate, double-charge-proof payments and 3-D Secure (SCA) compliance. Built real-time ride dispatch with Firestore listeners and ACID transactions for sub-second GPS/status sync with zero double-bookings under concurrent driver acceptance.",
-    outcome:
-      "Delivered the full 3-portal system in under 12 weeks, validated by 90+ Jest / React Testing Library automated tests. Shipped via automated GitHub → Vercel CI/CD, pairing full-stack ownership with AI-augmented engineering (Claude Code, prompt-engineered agentic workflows).",
-    role: "Solo build — architecture, full-stack, payments, real-time dispatch, testing, and deployment.",
-    metricBadge: "90+ Jest Tests",
-    keyAchievement:
-      "Delivered the full 3-portal system in under 12 weeks — solo, pairing full-stack ownership with AI-augmented engineering.",
-    live: { label: "uber-demo-omega.vercel.app", href: "https://uber-demo-omega.vercel.app" },
+    tagline: "Full-stack ride-hailing platform — a three-portal marketplace",
+    stack: ["React 19", "Firebase", "Stripe", "Mapbox", "Vercel"],
+    summary:
+      "A production-grade, three-portal marketplace (customer, driver, admin) shipped end-to-end — owning UI, secure REST APIs, cloud data modelling, payment infrastructure and DevOps as a solo engineer.",
+    highlights: [
+      "Engineered 8 serverless REST APIs (Node.js / Cloud Functions) with JWT verification, rate limiting (100 req / 15 min) and idempotent Stripe processing — automating an 80/20 commission split with penny-accurate, double-charge-proof payments and 3-D Secure (SCA) compliance.",
+      "Built real-time ride dispatch with Firestore listeners and ACID transactions — sub-second GPS/status sync, zero double-bookings under concurrent driver acceptance and 15s offer timers.",
+      "Delivered the full 3-portal system in under 12 weeks by pairing full-stack ownership with AI-augmented engineering (Claude Code, prompt-engineered agentic workflows) and automated GitHub → Vercel CI/CD.",
+    ],
+    role: "Solo build — architecture, full-stack, payments, real-time dispatch, testing and deployment.",
+    badges: ["90+ automated tests", "8 serverless APIs", "Shipped in < 12 weeks"],
+    live: { label: "uber-demo-omega.vercel.app", href: "https://uber-demo-omega.vercel.app/" },
     code: { label: "GitHub", href: "https://github.com/shekar987/RideX-app" },
   },
   {
-    name: "AI Financial Analysis System",
+    name: "FinSight",
     year: "2025",
+    tagline: "Natural-language analysis of SEC 10-K filings — without hallucinated numbers",
     stack: ["Python", "Anthropic Claude API", "pandas"],
-    tagline: "Natural-language queries over SEC 10-K filings — without hallucinated numbers",
-    problem:
-      "Make multi-year SEC 10-K filings (Microsoft, Tesla, Apple) queryable in natural language — without hallucinated numbers, which is where naive LLM finance apps fail.",
-    approach:
-      "A Python ETL pipeline parses 10-K filings into structured datasets covering revenue, margins, and operational metrics across years. The Anthropic Claude API is integrated with iteratively-tuned prompts that improve factual accuracy on numerical financial data and suppress hallucination. The natural-language interface queries the structured layer, not raw LLM recall.",
-    outcome:
-      "Answers analytical questions over multi-year filings — growth, margin, performance — sourced directly from parsed data, not generated.",
-    role: "Solo build — ETL, prompt engineering, and Claude integration.",
+    summary:
+      "Makes multi-year SEC 10-K filings (Microsoft, Tesla, Apple) queryable in natural language without hallucinated figures — the failure mode of naive LLM finance apps.",
+    highlights: [
+      "Python ETL pipeline parses 10-K filings into structured datasets covering revenue, margins and operational metrics across years.",
+      "Claude API integrated with iteratively-tuned prompts that ground every answer in the parsed data layer rather than raw model recall.",
+      "Answers growth, margin and performance questions across multi-year filings — sourced, not generated.",
+    ],
+    role: "Solo build — ETL, prompt engineering and Claude integration.",
+    badges: ["3 companies", "Multi-year 10-K data"],
     code: {
       label: "GitHub",
       href: "https://github.com/shekar987/finsight-financial-chatbot",
@@ -176,6 +258,7 @@ export type Experience = {
   company: string;
   period: string;
   type: string;
+  stack: string[];
   highlight?: string;
   bullets: ExperienceBullet[];
 };
@@ -186,28 +269,41 @@ export const experiences: Experience[] = [
     company: "Brane Group",
     period: "Jul 2022 – Sep 2024",
     type: "Full-time · 2 years",
+    stack: [
+      "Python",
+      "FastAPI",
+      "React",
+      "TypeScript",
+      "REST APIs",
+      "PostgreSQL",
+      "MySQL",
+      "MongoDB",
+      "Redis",
+      "JWT / RBAC",
+      "LLM / RAG",
+    ],
     highlight:
-      "Cut deployment lead time 40% and API response time 25% on live production Spring Boot services.",
+      "20+ production API modules shipped; API response times cut ~25% and frequently accessed queries ~30% on secure enterprise workflows.",
     bullets: [
       {
-        text: "Engineered and refactored a high-volume Spring Boot transaction API, applying query optimisation and caching to reduce response time under production load.",
+        text: "Engineered and delivered enterprise web applications and backend services using Python, FastAPI, React, TypeScript and REST APIs across the full software development lifecycle.",
+        metric: "20+ API modules",
+      },
+      {
+        text: "Designed and maintained secure Python/FastAPI backend services for enterprise workflows — JWT authentication, RBAC, request validation and structured error handling — improving typical API response times through service-layer optimisation and more efficient request processing.",
         metric: "−25% latency",
       },
       {
-        text: "Diagnosed and resolved PostgreSQL and MySQL performance bottlenecks through indexing and database tuning, cutting SQL execution time for downstream consumers.",
+        text: "Built responsive, component-based React + TypeScript applications — dashboards, forms and workflow-driven interfaces for 3+ core enterprise workflow areas — with reusable component patterns.",
+        metric: "−20% frontend effort",
+      },
+      {
+        text: "Designed and optimised data-driven functionality on PostgreSQL, MySQL, MongoDB and Redis with indexing, query optimisation and caching; contributed to the FRMS platform supporting 4 resource categories: counters, gates, belts and stands.",
         metric: "−30% query time",
       },
       {
-        text: "Spearheaded and automated CI/CD delivery in Jenkins and GitHub Actions, reducing deployment lead time and improving rollback reliability.",
-        metric: "−40% lead time",
-      },
-      {
-        text: "Detected and troubleshot production bottlenecks across Spring Boot microservices via structured monitoring, log analysis, and root-cause investigation.",
-        metric: "−15% downtime",
-      },
-      {
-        text: "Mentored and guided 3 junior developers through structured code review in an 8+ engineer Agile team.",
-        metric: "−20% recurring defects",
+        text: "Developed AI-enabled enterprise services across 2+ solution areas — facial-recognition workflows, then LLM/RAG-based knowledge solutions that automate business-document generation.",
+        metric: "−25% manual docs",
       },
     ],
   },
@@ -216,15 +312,23 @@ export const experiences: Experience[] = [
     company: "CodSoft",
     period: "Jan 2022 – Jun 2022",
     type: "Internship · 6 months",
+    stack: ["Java", "JDBC", "JavaScript", "HTML5", "CSS3", "Bootstrap 4"],
     bullets: [
       {
-        text: "Architected a layered Student Course Registration System across entity, service, persistence, and presentation layers — enforcing validation guards that eliminated duplicate-enrolment and invalid-drop errors.",
+        text: "Architected a Student Course Registration System with a layered architecture across entity, service, persistence and presentation layers, with validation rules preventing duplicate enrolments and invalid course-drop operations.",
       },
       {
-        text: "Isolated a JDBC persistence layer behind a dedicated DatabaseManager class, ensuring no view class held direct SQL — the same service/repository boundary later applied in production Spring Boot work.",
+        text: "Isolated a JDBC persistence layer behind a dedicated DatabaseManager component, separating database access from application and presentation logic.",
       },
       {
-        text: "Delivered 9 end-to-end projects solo — requirements to submission — across 2 GitHub repositories with structured commits, at 100% on-time submission.",
+        text: "Developed an interactive calculator with JavaScript and CSS Grid — keyboard support and error handling for invalid input.",
+      },
+      {
+        text: "Built 3 multi-section responsive pages with HTML5, CSS3, Bootstrap 4 and Flexbox, using the 12-column grid to keep layouts consistent across mobile, tablet and desktop.",
+      },
+      {
+        text: "Delivered and documented 9 end-to-end projects solo — requirements to submission — across 2 GitHub repositories with structured commits.",
+        metric: "100% on time",
       },
     ],
   },
@@ -233,34 +337,55 @@ export const experiences: Experience[] = [
 export type SkillCategory = {
   title: string;
   description: string;
+  icon: "server" | "layout" | "database" | "brain" | "cloud" | "shield";
   skills: string[];
 };
 
 export const skillCategories: SkillCategory[] = [
   {
-    title: "Backend & Databases",
-    description: "Server-side systems, APIs, and data layers.",
-    skills: ["Java", "Spring Boot", "Python", "PostgreSQL", "Supabase"],
+    title: "Backend & APIs",
+    description: "Production services, REST design and service-oriented architecture.",
+    icon: "server",
+    skills: ["Python", "FastAPI", "Java", "Node.js", "REST API Design", "SQLAlchemy", "Microservices"],
   },
   {
-    title: "Frontend & Tools",
-    description: "Interfaces and the typed toolchain behind them.",
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    title: "Frontend",
+    description: "Component-based, typed interfaces that ship.",
+    icon: "layout",
+    skills: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Responsive UI"],
   },
   {
-    title: "Cloud & DevOps",
-    description: "Shipping, automating, and running in production.",
+    title: "Data & Storage",
+    description: "Schema design, indexing, caching and query optimisation.",
+    icon: "database",
+    skills: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Supabase", "Firebase / Firestore"],
+  },
+  {
+    title: "AI & LLM Engineering",
+    description: "Where I go deeper than the average full-stack engineer.",
+    icon: "brain",
     skills: [
-      "AWS Certified Cloud Practitioner",
-      "Docker",
-      "Jenkins",
-      "GitHub Actions",
+      "Anthropic Claude API",
+      "OpenAI API",
+      "LangChain",
+      "LlamaIndex",
+      "RAG & Knowledge Retrieval",
+      "LLM Orchestration",
+      "Prompt Engineering",
+      "Workflow Automation",
     ],
   },
   {
-    title: "Specialities",
-    description: "Where I go deeper than the average full-stack engineer.",
-    skills: ["LLM Orchestration", "Prompt Engineering", "OAuth 2.0"],
+    title: "Cloud & DevOps",
+    description: "Shipping, automating and running software in production.",
+    icon: "cloud",
+    skills: ["AWS (Certified ×2)", "Docker", "CI/CD", "Vercel", "Git · GitHub · GitLab", "Production Debugging"],
+  },
+  {
+    title: "Security & Auth",
+    description: "Multi-tenant data protection and hardened access control.",
+    icon: "shield",
+    skills: ["JWT", "OAuth 2.0", "RBAC", "Row-Level Security", "AES-256-GCM", "Rate Limiting", "Stripe · 3-D Secure"],
   },
 ];
 
@@ -277,21 +402,33 @@ export const education: Education[] = [
     degree: "MSc Computer Science",
     institution: "University of East London",
     period: "Jan 2025 – Jan 2027",
-    note: "AWS-accredited programme focused on Software Engineering, Cloud Computing, and AI applications.",
+    note: "AWS-accredited programme focused on Software Engineering, Cloud Computing and AI applications.",
     highlights: [
-      "Research Assistant on AssetGuard+, a university-backed AI cybersecurity startup — evaluated 11 industry asset-management platforms (Axonius, Qualys, Tenable, runZero), delivering a comparative gap analysis informing the platform's development priorities.",
+      "Research Assistant on AssetGuard+, a university-backed AI cybersecurity startup — evaluated 11 industry asset-management platforms (Axonius, Qualys, Tenable, runZero) using verified user reviews and industry reports, delivering a comparative gap analysis that informs the platform's development priorities.",
       "Selected for the AssetGuard+ Full Stack Development Team, collaborating with the academic technical lead to design and build core features of an AI-powered cyber asset identification platform.",
     ],
   },
   {
     degree: "BSc Computer Science — Distinction",
-    institution: "Keshav Memorial Institute of Technology, India",
+    institution: "Keshav Memorial Institute of Technology",
     period: "Jul 2019 – Jul 2023",
-    note: "Coursework in Data Structures, OOP, Databases, and Software Engineering.",
+    note: "Graduated with Distinction. Coursework in Data Structures, OOP, Databases and Software Engineering.",
   },
 ];
 
-export const certifications: string[] = [
-  "AWS Certified Cloud Practitioner — Amazon Web Services",
-  "Full Stack Developer Internship Certificate — CodSoft",
+export type Certification = {
+  name: string;
+  issuer: string;
+  short: string;
+};
+
+export const certifications: Certification[] = [
+  { name: "AWS Certified AI Practitioner", issuer: "Amazon Web Services", short: "AIF" },
+  { name: "AWS Certified Cloud Practitioner", issuer: "Amazon Web Services", short: "CLF" },
+];
+
+export const workAuthorisation: string[] = [
+  "Eligible for full-time work",
+  "Immediately available",
+  "No sponsorship required",
 ];

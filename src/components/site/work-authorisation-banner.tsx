@@ -1,30 +1,42 @@
-import { ShieldCheck } from "lucide-react";
+import { BadgeCheck, Clock, ShieldCheck, type LucideIcon } from "lucide-react";
+import { workAuthorisation } from "@/data/portfolio";
 import { Reveal } from "@/components/site/reveal";
 
+const icons: LucideIcon[] = [BadgeCheck, Clock, ShieldCheck];
+
 /**
- * UK Work Authorisation micro-banner.
- * Sits just above the footer. Emerald border + checkmark.
- * Reuses existing theme tokens (primary = emerald) so it blends
- * with both light and dark modes. No new styles introduced.
+ * UK work-authorisation strip — three facts from the CV's "Right to work"
+ * section, rendered as pills so a recruiter can scan them in one glance.
  */
 export function WorkAuthorisationBanner() {
   return (
     <section aria-label="UK work authorisation" className="border-t border-border">
-      <div className="mx-auto max-w-5xl px-5 py-10 sm:px-8">
+      <div className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
         <Reveal>
-          <div className="flex items-center gap-3 rounded-xl border border-primary/30 bg-primary/[0.06] px-4 py-3 backdrop-blur-sm sm:px-5">
-            <span
+          <div className="glass relative overflow-hidden rounded-2xl px-5 py-5 sm:px-7">
+            <div
               aria-hidden
-              className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary"
-            >
-              <ShieldCheck className="h-4 w-4" />
-            </span>
-            <p className="text-sm font-medium leading-snug text-foreground sm:text-[15px]">
-              <span className="font-semibold text-primary">UK Work Authorisation</span>
-              <span className="text-muted-foreground"> — </span>
-              Full-time placement rights &amp; Graduate Route eligible. No
-              immediate sponsorship required.
-            </p>
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_circle_at_0%_50%,color-mix(in_oklch,var(--primary)_14%,transparent),transparent_60%)]"
+            />
+            <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">
+                UK right to work
+              </p>
+              <ul className="flex flex-wrap gap-2.5">
+                {workAuthorisation.map((w, i) => {
+                  const Icon = icons[i % icons.length];
+                  return (
+                    <li
+                      key={w}
+                      className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1.5 text-sm font-medium text-foreground"
+                    >
+                      <Icon className="h-4 w-4 text-primary" aria-hidden />
+                      {w}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         </Reveal>
       </div>

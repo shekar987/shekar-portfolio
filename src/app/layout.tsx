@@ -18,27 +18,31 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const siteUrl = "https://soma-keesari.vercel.app";
+const siteUrl = "https://shekar-portfolio-eight.vercel.app";
+const siteTitle = "Soma Shekar Keesari — Full-Stack & AI Engineer";
+const siteDescription =
+  "AWS Certified AI & Cloud Practitioner with 2+ years building production Python/FastAPI and React systems, now shipping end-to-end LLM products (Jobhuntz, RideX). MSc Computer Science (AWS-accredited), University of East London. London, UK — immediately available.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Soma Shekar Keesari — Backend Engineer · Full-Stack & AI",
+    default: siteTitle,
     template: "%s — Soma Shekar Keesari",
   },
-  description:
-    "Backend engineer with 2+ years building Spring Boot microservices, now shipping full-stack and AI products. MSc Computer Science (AWS-accredited) at the University of East London. Based in London, open to work.",
+  description: siteDescription,
   keywords: [
-    "Backend Engineer",
     "Full-Stack Engineer",
-    "Java",
-    "Spring Boot",
+    "AI Engineer",
+    "Python",
+    "FastAPI",
     "React",
     "TypeScript",
     "Next.js",
     "PostgreSQL",
-    "AWS",
-    "AI",
+    "Supabase",
+    "AWS Certified",
+    "LLM",
+    "RAG",
     "Anthropic Claude",
     "London",
   ],
@@ -48,9 +52,9 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   openGraph: {
-    title: "Soma Shekar Keesari — Backend Engineer · Full-Stack & AI",
+    title: siteTitle,
     description:
-      "2+ years building Spring Boot microservices, now shipping full-stack and AI products. MSc CS (AWS-accredited), University of East London. London, UK.",
+      "2+ years on production Python/FastAPI + React systems. Now shipping end-to-end AI products. AWS Certified ×2. MSc CS, University of East London. London, UK.",
     url: siteUrl,
     siteName: "Soma Shekar Keesari",
     locale: "en_GB",
@@ -58,9 +62,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Soma Shekar Keesari — Backend Engineer · Full-Stack & AI",
+    title: siteTitle,
     description:
-      "2+ years building Spring Boot microservices, now shipping full-stack and AI products. London, UK.",
+      "2+ years on production Python/FastAPI + React systems. Now shipping end-to-end AI products. London, UK.",
   },
   robots: {
     index: true,

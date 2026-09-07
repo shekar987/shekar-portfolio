@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
  * AmbientParticles — a lightweight, performant decorative background.
  *
  * - Fixed, full-viewport, z-[-10], pointer-events-none, opacity 0.4.
- * - Slow-moving glowing micro-particles in a subtle blue/violet hue.
+ * - Slow-moving glowing micro-particles in a subtle emerald/teal hue (matches the brand accent).
  * - Subtle magnetic pull toward the mouse cursor.
  * - Guards: caps DPR, scales particle count by viewport, pauses when tab
  *   hidden, renders a static field when prefers-reduced-motion.
@@ -22,11 +22,11 @@ type Particle = {
   vx: number;
   vy: number;
   r: number;
-  hue: number; // blue ~225, violet ~270
+  hue: number; // emerald ~158 → teal ~195
   alpha: number;
 };
 
-const BLUE_VIOLET_HUES = [225, 240, 260, 275];
+const EMERALD_TEAL_HUES = [158, 168, 180, 195];
 
 export function AmbientParticles() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -64,8 +64,8 @@ export function AmbientParticles() {
           vy: (Math.random() - 0.5) * 0.12,
           r: Math.random() * 1.8 + 0.6,
           hue:
-            BLUE_VIOLET_HUES[
-              Math.floor(Math.random() * BLUE_VIOLET_HUES.length)
+            EMERALD_TEAL_HUES[
+              Math.floor(Math.random() * EMERALD_TEAL_HUES.length)
             ],
           alpha: Math.random() * 0.5 + 0.25,
         });
