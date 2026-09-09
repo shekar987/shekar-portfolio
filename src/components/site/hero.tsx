@@ -71,6 +71,8 @@ const code: Token[][] = [
     { t: ": [", c: "punc" },
     { t: '"Jobhuntz"', c: "str" },
     { t: ", ", c: "punc" },
+    { t: '"CampaignPulse"', c: "str" },
+    { t: ", ", c: "punc" },
     { t: '"RideX"', c: "str" },
     { t: ", ", c: "punc" },
     { t: '"FinSight"', c: "str" },

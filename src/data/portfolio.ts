@@ -71,7 +71,7 @@ export const glance: { label: string; value: string; icon: GlanceIcon }[] = [
   { label: "2+ years", value: "Full Stack Engineer · Brane Group", icon: "briefcase" },
   { label: "AWS Certified ×2", value: "AI Practitioner · Cloud Practitioner", icon: "badge" },
   { label: "MSc Computer Science", value: "University of East London · AssetGuard+", icon: "graduation" },
-  { label: "3 products shipped", value: "Jobhuntz · RideX · FinSight", icon: "rocket" },
+  { label: "4 products shipped", value: "Jobhuntz · CampaignPulse · RideX · FinSight", icon: "rocket" },
 ];
 
 /** Technologies for the scrolling ticker under the hero. All from the CV. */
@@ -85,7 +85,9 @@ export const techTicker: string[] = [
   "Redis",
   "MongoDB",
   "Supabase",
-  "AWS",
+  "GraphQL",
+  "AWS Lambda · SQS · SNS",
+  "Terraform",
   "Docker",
   "Anthropic Claude API",
   "OpenAI API",
@@ -179,6 +181,13 @@ export type Project = {
   badges?: string[];
   /** Optional linear pipeline to visualise (featured card only). */
   pipeline?: string[];
+  /** Labels around the pipeline visual: title, badge, connector notes, footer stats. */
+  pipelineMeta?: {
+    title: string;
+    badge?: string;
+    notes: string[];
+    stats: [string, string][];
+  };
   live?: { label: string; href: string };
   code: { label: string; href: string };
 };
@@ -207,8 +216,65 @@ export const projects: Project[] = [
     featured: true,
     badges: ["8-step LLM pipeline", "3 LLM providers", "8 security findings fixed"],
     pipeline: ["Job description", "JD analysis", "Tailored CV + cover letter", "ATS scoring"],
+    pipelineMeta: {
+      title: "LLM pipeline",
+      badge: "8 steps",
+      notes: ["Structured JSON contract", "Per-step integrity check", "Every claim traced to source"],
+      stats: [
+        ["3", "LLM providers"],
+        ["RLS", "Multi-tenant"],
+        ["AES-256", "Key encryption"],
+      ],
+    },
     live: { label: "jobhuntz.app", href: "https://www.jobhuntz.app/" },
     code: { label: "GitHub", href: "https://github.com/shekar987/cv-tailor" },
+  },
+  {
+    name: "CampaignPulse",
+    year: "2026",
+    tagline: "Event-driven campaign delivery reliability platform",
+    stack: [
+      "React 19",
+      "TypeScript",
+      "React Query",
+      "Tailwind CSS · CSS Modules · Design tokens",
+      "Node.js",
+      "GraphQL",
+      "PostgreSQL",
+      "AWS Lambda · SQS · SNS · CloudWatch",
+      "Terraform",
+    ],
+    summary:
+      "A full-stack TypeScript platform that monitors campaign delivery across four channels — React frontend, GraphQL APIs, backend services and event-processing workers — with automated incident detection, retries and a dead-letter queue on AWS.",
+    highlights: [
+      "Designed and built a full-stack TypeScript application across a React frontend, GraphQL APIs, backend services and event-processing workers, monitoring campaign delivery across four channels.",
+      "Built reusable React components and application routes using React Hooks, TanStack React Query, Tailwind CSS, CSS Modules and a generated design-token system, with responsive and accessible loading, error and no-data states.",
+      "Implemented an event-driven delivery pipeline using AWS Lambda and SQS, with idempotent processing, exponential-backoff retries and dead-letter queue handling for failed messages.",
+      "Developed automated incident detection and operational monitoring using SNS notifications, CloudWatch logs, metrics, alarms and dashboards, supporting investigation through correlation-ID event timelines.",
+      "Built PostgreSQL-backed services with race-safe state transitions and duplicate-event protection, supported by 192 unit/integration tests and 16 Playwright E2E tests.",
+      "Provisioned AWS infrastructure using Terraform and implemented automated quality checks using GitHub Actions CI/CD, including accessibility testing with axe.",
+    ],
+    role: "Solo build — architecture, frontend, GraphQL API, event workers, AWS infrastructure and CI/CD.",
+    featured: true,
+    badges: ["192 unit / integration tests", "16 Playwright E2E tests", "4 delivery channels"],
+    pipeline: ["Delivery event", "SQS queue", "Lambda worker", "PostgreSQL state", "Incident + SNS alert"],
+    pipelineMeta: {
+      title: "Delivery pipeline",
+      badge: "Event-driven",
+      notes: [
+        "Correlation-ID timeline",
+        "Idempotent processing",
+        "Exponential-backoff retries",
+        "Dead-letter queue on failure",
+      ],
+      stats: [
+        ["4", "Channels"],
+        ["DLQ", "Failed messages"],
+        ["Terraform", "Infra as code"],
+      ],
+    },
+    live: { label: "CampaignPulse demo", href: "https://d2tg6k6wy891qy.cloudfront.net/" },
+    code: { label: "GitHub", href: "https://github.com/shekar987/CampaignPulse" },
   },
   {
     name: "RideX",
@@ -346,13 +412,13 @@ export const skillCategories: SkillCategory[] = [
     title: "Backend & APIs",
     description: "Production services, REST design and service-oriented architecture.",
     icon: "server",
-    skills: ["Python", "FastAPI", "Java", "Node.js", "REST API Design", "SQLAlchemy", "Microservices"],
+    skills: ["Python", "FastAPI", "Java", "Node.js", "REST API Design", "GraphQL", "SQLAlchemy", "Microservices", "Event-Driven Architecture"],
   },
   {
     title: "Frontend",
-    description: "Component-based, typed interfaces that ship.",
+    description: "Component-based, typed, accessible interfaces that ship.",
     icon: "layout",
-    skills: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Responsive UI"],
+    skills: ["React", "Next.js", "TypeScript", "JavaScript", "React Query", "Tailwind CSS", "Design Tokens", "Playwright", "Accessibility (axe)"],
   },
   {
     title: "Data & Storage",
@@ -379,7 +445,7 @@ export const skillCategories: SkillCategory[] = [
     title: "Cloud & DevOps",
     description: "Shipping, automating and running software in production.",
     icon: "cloud",
-    skills: ["AWS (Certified ×2)", "Docker", "CI/CD", "Vercel", "Git · GitHub · GitLab", "Production Debugging"],
+    skills: ["AWS (Certified ×2)", "AWS Lambda · SQS · SNS", "CloudWatch", "Terraform", "Docker", "GitHub Actions CI/CD", "Vercel", "Git · GitHub · GitLab", "Production Debugging"],
   },
   {
     title: "Security & Auth",

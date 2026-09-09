@@ -6,6 +6,8 @@ import {
   Lock,
   Braces,
   ShieldCheck,
+  RefreshCw,
+  Bell,
   type LucideIcon,
 } from "lucide-react";
 import { projects, type Project } from "@/data/portfolio";
@@ -197,17 +199,15 @@ function FeaturedCard({ project }: { project: Project }) {
   );
 }
 
-const pipelineNotes: { icon: LucideIcon; text: string }[] = [
-  { icon: Braces, text: "Structured JSON contract" },
-  { icon: ShieldCheck, text: "Per-step integrity check" },
-  { icon: Lock, text: "Every claim traced to source" },
-];
+const noteIcons: LucideIcon[] = [Braces, ShieldCheck, Lock, RefreshCw, Bell];
 
 function PipelineVisual({ project }: { project: Project }) {
   const steps = project.pipeline ?? [];
+  const meta = project.pipelineMeta;
+  const notes = meta?.notes ?? [];
   return (
     <div
-      aria-label={`${project.name} LLM pipeline`}
+      aria-label={`${project.name} ${meta?.title ?? "pipeline"}`}
       className="glass relative flex flex-col rounded-xl p-0 shadow-[0_30px_60px_-40px_oklch(0_0_0/0.7)]"
     >
       {/* Browser-ish chrome */}
@@ -226,17 +226,19 @@ function PipelineVisual({ project }: { project: Project }) {
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-center justify-between">
           <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-            LLM pipeline
+            {meta?.title ?? "Pipeline"}
           </span>
-          <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 font-mono text-[10px] text-primary">
-            8 steps
-          </span>
+          {meta?.badge && (
+            <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 font-mono text-[10px] text-primary">
+              {meta.badge}
+            </span>
+          )}
         </div>
 
         <ol className="mt-4 space-y-0">
           {steps.map((s, i) => {
-            const note = pipelineNotes[i % pipelineNotes.length];
-            const Note = note.icon;
+            const noteText = notes.length ? notes[i % notes.length] : undefined;
+            const Note = noteIcons[i % noteIcons.length];
             const last = i === steps.length - 1;
             return (
               <li key={s} className="relative">
@@ -258,10 +260,12 @@ function PipelineVisual({ project }: { project: Project }) {
                       aria-hidden
                       className="h-5 w-px border-l border-dashed border-primary/60"
                     />
-                    <span className="inline-flex items-center gap-1.5 font-mono text-[10.5px] text-muted-foreground">
-                      <Note className="h-3 w-3 text-primary/80" aria-hidden />
-                      {note.text}
-                    </span>
+                    {noteText && (
+                      <span className="inline-flex items-center gap-1.5 font-mono text-[10.5px] text-muted-foreground">
+                        <Note className="h-3 w-3 text-primary/80" aria-hidden />
+                        {noteText}
+                      </span>
+                    )}
                   </div>
                 )}
               </li>
@@ -270,11 +274,7 @@ function PipelineVisual({ project }: { project: Project }) {
         </ol>
 
         <dl className="mt-5 grid grid-cols-3 gap-2 border-t border-border pt-4">
-          {[
-            ["3", "LLM providers"],
-            ["RLS", "Multi-tenant"],
-            ["AES-256", "Key encryption"],
-          ].map(([v, l]) => (
+          {(meta?.stats ?? []).map(([v, l]) => (
             <div key={l} className="rounded-lg border border-border bg-background/40 px-2.5 py-2 text-center">
               <dt className="font-mono text-sm font-semibold text-primary">{v}</dt>
               <dd className="mt-0.5 text-[10.5px] text-muted-foreground">{l}</dd>
