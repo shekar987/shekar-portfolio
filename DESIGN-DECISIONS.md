@@ -187,3 +187,11 @@ The data-driven architecture means the compiler guards content drift, and a new 
 **Bug fixed during build:** on mobile the hero code window's long `whitespace-pre` lines made the grid column wider than the viewport, clipping the headline. Fix: `min-w-0` on both grid columns + `overflow-hidden` on the card. Verified via CDP that `scrollWidth === innerWidth` at 390px.
 
 **Rule kept:** no fabricated numbers. Anything not on the CV was removed rather than reworded.
+
+---
+
+## 10. CV download removed (Oct 2026)
+
+**Decision:** No downloadable CV on the site. `public/cv.pdf` and `links.cv` were deleted; every "Download CV" button was replaced with an equally weighted secondary action (hero → "View my work" anchor, nav → GitHub icon, mobile menu → GitHub, footer → "Connect on LinkedIn"). The resume PDF stays in `upload/` for reference only.
+
+**Also cleaned up:** the leftover Netlify experiment (`public/index.html`, `netlify.toml`) was removed, `robots.txt` now points at a generated `sitemap.xml` (`src/app/sitemap.ts`).

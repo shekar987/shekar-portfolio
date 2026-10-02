@@ -2,7 +2,8 @@
  * Single source of truth for all portfolio content.
  * Typed so the compiler guards against drift.
  *
- * Updated Sep 2026 from "SHEKAR KEESARI RESUME.pdf" (public/cv.pdf).
+ * Updated Sep 2026 from "SHEKAR KEESARI RESUME.pdf" (kept in upload/; the
+ * PDF is intentionally not published or linked from the site).
  * Every figure here appears in that CV — nothing is inflated or invented.
  * The AI Financial Analysis System (FinSight) is retained on the site per an
  * earlier explicit request even though it is not on the current CV.
@@ -34,7 +35,6 @@ export const links = {
   phone: profile.phoneHref,
   linkedin: "https://www.linkedin.com/in/shekar-keesari-4bbaa6234/",
   github: "https://github.com/shekar987",
-  cv: "/cv.pdf",
   site: "https://shekar-portfolio-eight.vercel.app",
 } as const;
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X, ArrowUpRight, Download } from "lucide-react";
+import { Menu, X, ArrowUpRight, Github } from "lucide-react";
 import { profile, navLinks, links } from "@/data/portfolio";
 import { ThemeToggle } from "@/components/theme-toggle";
 
@@ -104,11 +104,13 @@ export function SiteNav() {
         <div className="hidden items-center gap-2 md:flex">
           <ThemeToggle />
           <a
-            href={links.cv}
-            className="btn-ghost inline-flex h-9 items-center gap-1.5 rounded-lg px-3 text-sm text-foreground/90"
+            href={links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub profile"
+            className="btn-ghost inline-flex h-9 w-9 items-center justify-center rounded-lg text-foreground/90"
           >
-            <Download className="h-3.5 w-3.5" aria-hidden />
-            CV
+            <Github className="h-4 w-4" aria-hidden />
           </a>
           <a
             href={links.email}
@@ -162,12 +164,14 @@ export function SiteNav() {
               ))}
               <li className="mt-2 grid grid-cols-2 gap-2">
                 <a
-                  href={links.cv}
+                  href={links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
                   className="btn-ghost inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-3 text-sm font-medium text-foreground"
                 >
-                  <Download className="h-4 w-4" aria-hidden />
-                  Download CV
+                  <Github className="h-4 w-4" aria-hidden />
+                  GitHub
                 </a>
                 <a
                   href={links.email}
