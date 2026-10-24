@@ -273,7 +273,7 @@ export const projects: Project[] = [
         ["Terraform", "Infra as code"],
       ],
     },
-    live: { label: "CampaignPulse demo", href: "https://d2tg6k6wy891qy.cloudfront.net/" },
+    live: { label: "CampaignPulse demo", href: "https://d2249v19zh4pw4.cloudfront.net/" },
     code: { label: "GitHub", href: "https://github.com/shekar987/CampaignPulse" },
   },
   {
